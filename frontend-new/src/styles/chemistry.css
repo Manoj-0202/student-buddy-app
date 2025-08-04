@@ -1,0 +1,70 @@
+.background {
+  background-image: url('https://res.cloudinary.com/dq4zfh8nh/image/upload/v1754044853/ChatGPT_Image_Aug_1_2025_04_09_02_PM_zjuxja.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.overlay-box {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #0f172a;
+  max-width: 600px;
+  width: 90%;
+  z-index: 2;
+}
+
+.chem-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.chem-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: #1e293b;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.action-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.action-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.icon {
+  font-size: 1.25rem;
+}
