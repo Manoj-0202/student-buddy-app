@@ -1,5 +1,5 @@
 .home-background {
-  background-image: url('https://res.cloudinary.com/dq4zfh8nh/image/upload/v1754045613/retrosupply-jLwVAUtLOAQ-unsplash_ber22j.jpg');
+  background: linear-gradient(135deg, #6EE7B7, #3B82F6, #9333EA);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,10 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .home-overlay {
-  background: rgba(0, 0, 0, 0.5); /* dark overlay for contrast */
+  background: rgba(0, 0, 0, 0.55); 
   position: absolute;
   top: 0;
   left: 0;
@@ -21,23 +22,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .home-content {
-  color: white;
+  color: #f9fafb;
   text-align: center;
   z-index: 2;
+  max-width: 800px;
+  padding: 2rem;
 }
 
 .home-title {
-  font-size: 3.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .home-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   margin-bottom: 2rem;
+  color: #e2e8f0;
 }
 
 .home-buttons {
@@ -48,25 +56,29 @@
 }
 
 .home-button {
-  padding: 12px 24px;
-  font-size: 1rem;
-  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  border-radius: 6px;
   border: none;
   background-color: #2563eb;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  min-width: 140px;
 }
 
 .home-button:hover {
-  background-color: #1e40af;
+  background-color: #1d4ed8;
+  transform: scale(1.03);
 }
 
 .home-button.secondary {
   background-color: transparent;
-  border: 2px solid white;
+  border: 2px solid #ffffff;
+  color: #ffffff;
 }
 
 .home-button.secondary:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.03);
 }

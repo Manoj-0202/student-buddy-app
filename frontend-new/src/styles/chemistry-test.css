@@ -1,115 +1,189 @@
 .chemistry-test-container {
-
-  padding: 2rem;
-
-  background-color: #f9fafb;
-
+  background: linear-gradient(to right, #e0f2f1, #f0f4f8);
   min-height: 100vh;
-
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
- 
+
 .chemistry-test-box {
-
+  background-color: #ffffff;
+  border-radius: 16px;
+  margin-top: 4rem;
+  padding: 1.5rem;
   max-width: 900px;
-
-  margin: 0 auto;
-
-  background: #ffffff;
-
-  border-radius: 12px;
-
-  padding: 2rem;
-
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in-out;
 }
- 
-.chemistry-test-title {
 
-  font-size: 2rem;
-
-  font-weight: bold;
-
-  text-align: center;
-
-  margin-bottom: 2rem;
-
-  color: #2e3a59;
-
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
- 
-.qna-card {
 
-  border-bottom: 1px solid #e2e8f0;
-
+/* Header */
+.test-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1.5rem;
-
-  padding-bottom: 1.2rem;
-
 }
- 
-.option-item {
 
-  background: #f1f5f9;
-
-  padding: 8px 12px;
-
-  border-radius: 6px;
-
-  margin: 4px 0;
-
-}
- 
-.correct-answer {
-
-  background-color: #d1fae5;
-
-  color: #065f46;
-
-  font-weight: bold;
-
-}
- 
-.answer-label {
-
-  margin-top: 8px;
-
+.chemistry-test-title {
+  font-size: 1.2rem;
   color: #0f172a;
-
+  font-weight: 700;
 }
- 
+
 .back-button {
-
-  margin-top: 2rem;
-
-  padding: 10px 20px;
-
-  background-color: #2563eb;
-
-  color: white;
-
+  background-color: transparent;
+  color: #475569;
   border: none;
-
-  border-radius: 6px;
-
+  font-size: 0.9rem;
   cursor: pointer;
-
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
- 
+
 .back-button:hover {
+  color: #0f172a;
+}
 
+/* Question */
+.question-text {
+  font-size: 0.9rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Options */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.option-item {
+  background-color: #f8fafc;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  font-weight: 500;
+  user-select: none;
+  font-size: 0.8rem;
+}
+
+.option-item:hover {
+  background-color: #e2e8f0;
+}
+
+.correct-answer {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border-color: #10b981 !important;
+  font-weight: 600;
+}
+
+.wrong-answer {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #ef4444 !important;
+  font-weight: 600;
+}
+
+.answer-label {
+  margin-top: 0.8rem;
+  background-color: #d1fae5;
+  border-left: 5px solid #10b981;
+  padding: 0.7rem 1rem;
+  color: #065f46;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.button-group button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
   background-color: #1d4ed8;
-
 }
- 
+
+.button-group button:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* No Data State */
 .no-data-text {
-
   text-align: center;
-
-  font-size: 1.1rem;
-
-  color: #555;
-
+  color: #9ca3af;
+  font-size: 0.95rem;
+  padding: 1.5rem;
+  font-weight: 500;
 }
 
- 
+/* Responsive */
+@media (max-width: 768px) {
+  .chemistry-test-box {
+    padding: 1.2rem;
+  }
+
+  .chemistry-test-title {
+    font-size: 1.2rem;
+  }
+
+  .question-text {
+    font-size: 0.95rem;
+  }
+
+  .option-item {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .answer-label {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .button-group button {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+}

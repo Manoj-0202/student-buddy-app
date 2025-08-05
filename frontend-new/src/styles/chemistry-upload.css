@@ -10,26 +10,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 20px;
+  padding: 40px 16px;
+  box-sizing: border-box;
 }
 
 /* Upload Container */
 .upload-container {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 24px;
-  padding: 50px 44px;
+  border-radius: 20px;
+  padding: 36px 28px;
   width: 100%;
-  max-width: 720px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  max-width: 640px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #0f172a;
   animation: floatUp 0.9s ease-in-out both;
 }
 
-/* Floating animation */
 @keyframes floatUp {
   0% {
     opacity: 0;
@@ -41,146 +41,139 @@
   }
 }
 
-/* Title & subtitle */
 .page-title {
-  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
   font-weight: 700;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   color: #2c3f6b;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .page-subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: clamp(0.95rem, 2.3vw, 1.1rem);
   font-weight: 400;
   color: #475569;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   line-height: 1.6;
 }
 
-/* Form */
 .upload-form {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 24px;
 }
 
-/* Upload label */
 .upload-label,
 .question-label {
   text-align: left;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #1e293b;
 }
 
-/* File input */
 .file-input {
-  margin-top: 10px;
-  padding: 18px 20px;
+  margin-top: 8px;
+  padding: 16px;
   border: 2px dashed #cbd5e1;
-  border-radius: 16px;
-  background-color: rgba(243, 244, 246, 0.85);
-  font-size: 1.1rem;
+  border-radius: 14px;
+  background-color: rgba(243, 244, 246, 0.9);
+  font-size: 1rem;
   color: #1e293b;
   width: 100%;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .file-input:hover,
 .file-input:focus {
   border-color: #3b82f6;
-  background-color: rgba(191, 219, 254, 0.2);
-  box-shadow: 0 0 14px rgba(37, 99, 235, 0.25);
+  background-color: rgba(191, 219, 254, 0.3);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
   outline: none;
 }
 
-/* Dropdown */
 .question-select-section {
   text-align: left;
 }
 
 .question-select {
-  padding: 14px;
+  padding: 12px;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid #cbd5e1;
   background-color: #f1f5f9;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #0f172a;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .question-select:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 6px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
   outline: none;
 }
 
-/* Submit Button */
 .submit-button {
-  padding: 16px 36px;
-  font-size: 1.1rem;
+  padding: 14px 30px;
+  font-size: 1rem;
   font-weight: 700;
   background: linear-gradient(135deg, #38bdf8, #6366f1);
   color: #ffffff;
   border: none;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .submit-button:hover {
   background: linear-gradient(135deg, #2563eb, #7c3aed);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.45);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .upload-container {
-    padding: 40px 30px;
+    padding: 32px 24px;
     max-width: 90%;
   }
 
   .submit-button {
     width: 100%;
-    padding: 14px;
-    font-size: 1rem;
+    padding: 13px;
+    font-size: 0.95rem;
   }
 
   .file-input {
-    font-size: 1rem;
-    padding: 16px;
+    font-size: 0.95rem;
+    padding: 14px;
   }
 
   .question-select {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   .upload-container {
-    padding: 32px 20px;
+    padding: 28px 18px;
   }
 
   .page-title {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
   }
 
   .page-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .submit-button {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     padding: 12px;
   }
 
   .file-input {
-    padding: 14px;
-    font-size: 0.95rem;
+    padding: 12px;
+    font-size: 0.9rem;
   }
 }

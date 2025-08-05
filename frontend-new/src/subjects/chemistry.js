@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/chemistry.css";
-import { FaFileUpload } from "react-icons/fa";
+import { FaBookOpen, FaFlask, FaMicrophone, FaFileAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Chemistry = () => {
@@ -14,25 +14,25 @@ const Chemistry = () => {
 
         <div className="button-group">
           <button className="action-button">
-            <FaFileUpload className="icon" />
+            <FaBookOpen className="icon" />
             Know about chapter
           </button>
 
-          <button className="action-button">
-            <FaFileUpload className="icon" />
+          <button className="secondary-button">
+            <FaFlask className="icon" />
             Take Mock test
           </button>
 
           <button className="action-button">
-            <FaFileUpload className="icon" />
+            <FaMicrophone className="icon" />
             Ask a Question through speech
           </button>
 
           <button
-            className="action-button"
+            className="danger-button"
             onClick={() => navigate("/chemistry-upload-mcq")}
           >
-            <FaFileUpload className="icon" />
+            <FaFileAlt className="icon" />
             Write MCQs from PDF or Text
           </button>
         </div>

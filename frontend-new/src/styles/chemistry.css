@@ -1,3 +1,4 @@
+/* Fullscreen Background */
 .background {
   background-image: url('https://res.cloudinary.com/dq4zfh8nh/image/upload/v1754044853/ChatGPT_Image_Aug_1_2025_04_09_02_PM_zjuxja.png');
   background-size: cover;
@@ -8,63 +9,151 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  padding: 1.5rem;
 }
 
+/* Glass Overlay Box */
 .overlay-box {
   background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
-  padding: 50px 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
   text-align: center;
   color: #0f172a;
-  max-width: 600px;
-  width: 90%;
-  z-index: 2;
+  max-width: 680px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.overlay-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Title */
 .chem-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #0f172a;
 }
 
+/* Subtitle */
 .chem-subtitle {
   font-size: 1.2rem;
   font-weight: 400;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
   color: #1e293b;
 }
 
+/* Button Group */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1.5rem;
 }
 
-.action-button {
-  background-color: #2563eb;
+/* Buttons */
+.action-button,
+.secondary-button,
+.danger-button {
   color: white;
   border: none;
-  padding: 14px 24px;
-  font-size: 1rem;
-  border-radius: 10px;
+  padding: 1.4rem 2.4rem;
+  font-size: 1.3rem;
+  border-radius: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  font-weight: 500;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Button Gradients */
+.action-button {
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+}
 .action-button:hover {
-  background-color: #1d4ed8;
-  transform: translateY(-2px);
+  background: linear-gradient(90deg, #1d4ed8, #1e40af);
+  transform: translateY(-4px);
 }
 
+.secondary-button {
+  background: linear-gradient(90deg, #14b8a6, #0f766e);
+}
+.secondary-button:hover {
+  background: linear-gradient(90deg, #0f766e, #0d9488);
+  transform: translateY(-4px);
+}
+
+.danger-button {
+  background: linear-gradient(90deg, #f43f5e, #be123c);
+}
+.danger-button:hover {
+  background: linear-gradient(90deg, #be123c, #9f1239);
+  transform: translateY(-4px);
+}
+
+/* Icon Styling */
 .icon {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
+  margin-right: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .overlay-box {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .chem-title {
+    font-size: 2rem;
+  }
+
+  .chem-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .action-button,
+  .secondary-button,
+  .danger-button {
+    font-size: 1.2rem;
+    padding: 1.2rem 2rem;
+  }
+
+  .icon {
+    font-size: 1.1rem;
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay-box {
+    padding: 2rem 1rem;
+  }
+
+  .chem-title {
+    font-size: 1.7rem;
+  }
+
+  .chem-subtitle {
+    font-size: 1rem;
+  }
+
+  .action-button,
+  .secondary-button,
+  .danger-button {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .icon {
+    font-size: 1rem;
+    margin-right: 10px;
+  }
 }
