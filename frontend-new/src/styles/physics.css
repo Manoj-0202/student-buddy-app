@@ -1,0 +1,36 @@
+/* styles/physics.css */
+
+.physics-container {
+  min-height: 91vh;
+  background: linear-gradient(to right, #f0f4f8, #e3f2fd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.physics-box {
+  background-color: #ffffff;
+  padding: 3rem 4rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.physics-box:hover {
+  transform: translateY(-5px);
+}
+
+.physics-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 1rem;
+}
+
+.physics-subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #424242;
+}

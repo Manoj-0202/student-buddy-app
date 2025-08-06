@@ -1,0 +1,36 @@
+/* styles/maths.css */
+
+.maths-container {
+  min-height: 91vh;
+  background: linear-gradient(to right, #f0f4f8, #e8f5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.maths-box {
+  background-color: #ffffff;
+  padding: 3rem 4rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.maths-box:hover {
+  transform: translateY(-5px);
+}
+
+.maths-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2e7d32; /* Green tone */
+  margin-bottom: 1rem;
+}
+
+.maths-subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #424242;
+}

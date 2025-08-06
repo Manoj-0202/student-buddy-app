@@ -11,6 +11,8 @@ import Dashboard from './components/dashboard';
 import Chemistry from './subjects/chemistry';
 import ChemistryUpload from './uploads/chemistry-upload';
 import ChemistryTest from './tests/chemistry-test';
+import Physics from './subjects/physics';
+import Maths from './subjects/maths';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/subjects/chemistry" element={<Chemistry />} />
             <Route path="/chemistry-upload-mcq" element={<ChemistryUpload />} />
             <Route path="/chemistry-test" element={<ChemistryTest />} />
+            <Route path='/subjects/physics' element = {<Physics/>} />
+            <Route path='/subjects/maths' element = {<Maths/>} />
           </Routes>
         </main>
       </div>

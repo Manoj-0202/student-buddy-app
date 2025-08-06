@@ -13,9 +13,9 @@ const Chemistry = () => {
             <div className="card chemistry-card h-100 text-center p-4 shadow-sm">
               <div className="card-body">
                 <i className="fas fa-file-upload fa-3x text-primary mb-3"></i>
-                <h5 className="card-title">Create a Quiz</h5>
+                <h5 className="card-title"> Take the test</h5>
                 <p className="card-text">Generate a new quiz from your notes.</p>
-                <Link to="/chemistry-upload-mcq" className="btn btn-primary">Create Quiz</Link>
+                <Link to="/chemistry-upload-mcq" className="btn btn-primary">Take Test</Link>
               </div>
             </div>
           </div>

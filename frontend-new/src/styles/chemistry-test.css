@@ -9,11 +9,11 @@
   border-radius: 15px;
   transition: all 0.3s ease-in-out;
 }
-
+/* 
 .test-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-}
+} */
 
 .card-title {
   font-weight: 700;
@@ -45,14 +45,14 @@
 }
 
 .correct-answer {
-  background-color: #d4edda !important;
-  color: #155724 !important;
+  background-color: #1ebf44 !important;
+  color: #e5ebe6 !important;
   border-color: #c3e6cb !important;
 }
 
 .wrong-answer {
-  background-color: #f8d7da !important;
-  color: #721c24 !important;
+  background-color: #d2303d !important;
+  color: #e4e1e1 !important;
   border-color: #f5c6cb !important;
 }
 

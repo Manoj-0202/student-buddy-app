@@ -56,8 +56,8 @@ const ChemistryUpload = () => {
           <div className="col-lg-8">
             <div className="card upload-card p-4 shadow-sm">
               <div className="card-body">
-                <h1 className="card-title text-center mb-2">Create a Quiz</h1>
-                <p className="text-center text-muted mb-4">Upload your notes (PDF or TXT) and let AI generate custom quizzes for you!</p>
+                <h1 className="card-title text-center mb-2">Create a Test</h1>
+                <p className="text-center text-muted mb-4">Upload your notes (PDF or TXT) and let generate custom MCQ's for you!</p>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
                     <label htmlFor="file-upload" className="form-label">Upload Your Notes</label>

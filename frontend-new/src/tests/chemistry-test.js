@@ -85,8 +85,8 @@ const ChemistryTest = () => {
                     )}
 
                     <div className="d-flex justify-content-between mt-4">
-                      <button className="btn btn-secondary" onClick={handlePrev} disabled={currentIndex === 0}>Previous</button>
-                      <button className="btn btn-primary" onClick={handleNext} disabled={currentIndex === qnaPairs.length - 1}>Next</button>
+                      <button className="btn btn-secondary" onClick={handlePrev} disabled={currentIndex === 0}> <i className='fa-solid fa-angle-left'></i> Previous</button>
+                      <button className="btn btn-primary" onClick={handleNext} disabled={currentIndex === qnaPairs.length - 1}>Next <i className='fa-solid fa-angle-right'></i></button>
                     </div>
                   </div>
                 ) : (
