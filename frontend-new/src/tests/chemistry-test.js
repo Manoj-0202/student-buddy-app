@@ -89,13 +89,13 @@ const ChemistryTest = () => {
 
             <div className="button-group">
               <button onClick={handlePrev} disabled={currentIndex === 0}>
-                ← Prev
+                <i className="fa-solid fa-angle-left"></i> Previous
               </button>
               <button
                 onClick={handleNext}
                 disabled={currentIndex === qnaPairs.length - 1}
               >
-                Next →
+                Next <i className="fa-solid fa-angle-right"></i>
               </button>
             </div>
           </div>
