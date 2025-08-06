@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/chemistry-test.css";
+
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import '../styles/chemistry-test.css';
 
 const ChemistryTest = () => {
   const location = useLocation();
@@ -37,73 +38,67 @@ const ChemistryTest = () => {
   };
 
   const handleBack = () => {
-    navigate("/chemistry-upload-mcq");
+    navigate('/chemistry-upload-mcq');
   };
 
   return (
-    <div className="chemistry-test-container">
-      <div className="chemistry-test-box">
-        <div className="test-header">
-          <h3 className="chemistry-test-title"> Chemistry Test</h3>
-          <button onClick={handleBack} className="back-button">
-            ← Back
-          </button>
-        </div>
+    <div className="test-container py-5">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="card test-card p-4 shadow-sm">
+              <div className="card-body">
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <h1 className="card-title">Chemistry Test</h1>
+                  <button className="btn btn-light" onClick={handleBack}>Back</button>
+                </div>
 
-        {qnaPairs.length > 0 ? (
-          <div className="qna-card">
-            <p className="question-text">
-              <strong>Q{currentQuestion.question_number}:</strong> {currentQuestion.question}
-            </p>
+                {qnaPairs.length > 0 ? (
+                  <div>
+                    <p className="text-muted text-center mb-3">Question {currentIndex + 1} of {qnaPairs.length}</p>
+                    <p className="question-text">{currentQuestion.question}</p>
+                    <div className="options-list list-group">
+                      {Object.entries(currentQuestion.options).map(([key, value]) => {
+                        const isCorrect = key === currentQuestion.answer;
+                        const isSelected = key === selectedOption;
+                        let optionClass = 'list-group-item list-group-item-action';
+                        if (isAnswered) {
+                          if (isCorrect) {
+                            optionClass += ' correct-answer';
+                          } else if (isSelected) {
+                            optionClass += ' wrong-answer';
+                          }
+                        }
 
-            <div className="options-list">
-              {Object.entries(currentQuestion.options).map(([key, value]) => {
-                const isCorrect = key === currentQuestion.answer;
-                const isSelected = key === selectedOption;
+                        return (
+                          <button key={key} className={optionClass} onClick={() => handleOptionClick(key)} disabled={isAnswered}>
+                            {key}. {value}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                let optionClass = "option-item";
-                if (isAnswered && isSelected && isCorrect) {
-                  optionClass += " correct-answer";
-                } else if (isAnswered && isSelected && !isCorrect) {
-                  optionClass += " wrong-answer";
-                }
+                    {isAnswered && selectedOption !== currentQuestion.answer && (
+                      <div className="alert alert-info mt-3 correct-answer-info">
+                        Correct Answer: <strong>{currentQuestion.answer}</strong>. {currentQuestion.options[currentQuestion.answer]}
+                      </div>
+                    )}
 
-                return (
-                  <p
-                    key={key}
-                    className={optionClass}
-                    onClick={() => handleOptionClick(key)}
-                  >
-                    {key}. {value}
-                  </p>
-                );
-              })}
-            </div>
-
-            {isAnswered && selectedOption !== currentQuestion.answer && (
-              <p className="answer-label">
-                ✅ Correct Answer: <strong>{currentQuestion.answer}</strong> —{" "}
-                {currentQuestion.options[currentQuestion.answer]}
-              </p>
-            )}
-
-            <div className="button-group">
-              <button onClick={handlePrev} disabled={currentIndex === 0}>
-                <i className="fa-solid fa-angle-left"></i> Previous
-              </button>
-              <button
-                onClick={handleNext}
-                disabled={currentIndex === qnaPairs.length - 1}
-              >
-                Next <i className="fa-solid fa-angle-right"></i>
-              </button>
+                    <div className="d-flex justify-content-between mt-4">
+                      <button className="btn btn-secondary" onClick={handlePrev} disabled={currentIndex === 0}>Previous</button>
+                      <button className="btn btn-primary" onClick={handleNext} disabled={currentIndex === qnaPairs.length - 1}>Next</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <p>No questions available. Please create a quiz first.</p>
+                    <button className="btn btn-primary" onClick={() => navigate('/chemistry-upload-mcq')}>Create Quiz</button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        ) : (
-          <p className="no-data-text">
-            No Q&A pairs available. Please upload a file first.
-          </p>
-        )}
+        </div>
       </div>
     </div>
   );

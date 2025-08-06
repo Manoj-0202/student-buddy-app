@@ -1,179 +1,88 @@
-/* Background */
-.chemistry-bg {
-  background-image: url('https://res.cloudinary.com/dq4zfh8nh/image/upload/v1754287489/c-image-2_LE_upscale_balanced_x4_pl4pwn.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 16px;
-  box-sizing: border-box;
-}
-
-/* Upload Container */
 .upload-container {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  padding: 36px 28px;
-  width: 100%;
-  max-width: 640px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #0f172a;
-  animation: floatUp 0.9s ease-in-out both;
+  background: #f8f9fa;
+  min-height: calc(100vh - 70px); /* Adjust for navbar height */
+  padding-top: 30px; /* Add some top padding */
 }
 
-@keyframes floatUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-title {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #2c3f6b;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.page-subtitle {
-  font-size: clamp(0.95rem, 2.3vw, 1.1rem);
-  font-weight: 400;
-  color: #475569;
-  margin-bottom: 28px;
-  line-height: 1.6;
-}
-
-.upload-form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.upload-label,
-.question-label {
-  text-align: left;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #1e293b;
-}
-
-.file-input {
-  margin-top: 8px;
-  padding: 16px;
-  border: 2px dashed #cbd5e1;
-  border-radius: 14px;
-  background-color: rgba(243, 244, 246, 0.9);
-  font-size: 1rem;
-  color: #1e293b;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.file-input:hover,
-.file-input:focus {
-  border-color: #3b82f6;
-  background-color: rgba(191, 219, 254, 0.3);
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
-  outline: none;
-}
-
-.question-select-section {
-  text-align: left;
-}
-
-.question-select {
-  padding: 12px;
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  background-color: #f1f5f9;
-  font-size: 0.95rem;
-  color: #0f172a;
-  transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-.question-select:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
-  outline: none;
-}
-
-.submit-button {
-  padding: 14px 30px;
-  font-size: 1rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-  color: #ffffff;
+.upload-card {
   border: none;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
 }
 
-.submit-button:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.45);
+.upload-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.card-title {
+  font-weight: 700;
+  color: #343a40;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.form-control-lg,
+.form-select-lg {
+  border-radius: 10px;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+}
+
+/* Responsive adjustments for upload page */
+@media (max-width: 992px) {
+  .card-title {
+    font-size: 2.5rem;
+  }
+  .upload-card .card-body {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
   .upload-container {
-    padding: 32px 24px;
-    max-width: 90%;
+    min-height: calc(100vh - 60px); /* Adjust for smaller navbar on mobile */
+    padding-top: 20px;
   }
-
-  .submit-button {
-    width: 100%;
-    padding: 13px;
+  .card-title {
+    font-size: 2rem;
+  }
+  .form-label {
     font-size: 0.95rem;
   }
-
-  .file-input {
-    font-size: 0.95rem;
-    padding: 14px;
-  }
-
-  .question-select {
+  .form-control-lg,
+  .form-select-lg {
     font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+  .btn-primary {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
   }
 }
 
-@media (max-width: 480px) {
-  .upload-container {
-    padding: 28px 18px;
+@media (max-width: 576px) {
+  .upload-card {
+    margin-bottom: 1rem;
   }
-
-  .page-title {
-    font-size: 1.6rem;
+  .card-title {
+    font-size: 1.8rem;
   }
-
-  .page-subtitle {
-    font-size: 0.95rem;
-  }
-
-  .submit-button {
+  .form-label {
     font-size: 0.9rem;
-    padding: 12px;
   }
-
-  .file-input {
-    padding: 12px;
-    font-size: 0.9rem;
+  .form-control-lg,
+  .form-select-lg {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.7rem;
+  }
+  .btn-primary {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
   }
 }
