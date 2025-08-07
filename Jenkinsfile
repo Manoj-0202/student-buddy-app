@@ -10,9 +10,9 @@ pipeline {
     environment {
         SONAR_HOME = tool 'sonar-scanner';
         SONAR_ID = credentials('sonar')
-        DOCKER_FORNT_IMAGE_NAME = 'student_frontend'
+        DOCKER_FRONT_IMAGE_NAME = 'student_frontend'
         DOCKER_BACK_IMAGE_NAME = 'student_backend'
-        DOCKER_USERNAME = 'Rajesh'
+        DOCKER_USERNAME = credentials('docker')
         CHART_PATH = './helm'
     }
 
@@ -31,8 +31,8 @@ pipeline {
                 stage('Backend Dependency') {
                     steps {
                         sh '''
-                            cd -
-                            cd backend
+                            cd ../
+                            cd backend/
                             python3 -m venv backend/venv
                             bash -c ". backend/venv/bin/activate && pip install --upgrade pip"
                             bash -c ". backend/venv/bin/activate && pip install -r backend/requirements.txt"
@@ -74,13 +74,13 @@ pipeline {
 
         stage('Docker Build For Frontend') {
             steps {
-                sh 'docker build -t ${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} -f ./frontend-new/Dockerfile ./frontend-new'
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} -f ./frontend-new/Dockerfile ./frontend-new'
             }
         }
 
         stage('Docker Build For Backend') {
             steps {
-                sh 'docker build -t ${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./backend/Dockerfile ./backend'
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./backend/Dockerfile ./backend'
             }
         }
 
@@ -115,11 +115,14 @@ pipeline {
         //     }
         // }
 
-        // stage('Docker Image Push') {
-        //     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) {
-        //         sh 'docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE}:${BUILD_NUMBER}'
-        //     }
-        // }
+        stage('Docker Image Push') {
+            withCredentials([usernamePassword(credentialsId: 'main-docker', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) {
+                sh 'echo pushing frontend application'
+                sh 'docker push ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER}'
+                sh 'echo pushing backend application'
+                sh 'docker push ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER}'
+            }
+        }
 
         // stage('Stop & Run In Docker composer') {
         //     steps {
