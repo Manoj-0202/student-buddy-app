@@ -31,10 +31,8 @@ pipeline {
                 stage('Backend Dependency') {
                     steps {
                         sh '''
-                            ls -lrt
-                            pwd
-                            cd ../
                             cd backend/
+                            pwd
                             python3 -m venv backend/venv
                             bash -c ". backend/venv/bin/activate && pip install --upgrade pip"
                             bash -c ". backend/venv/bin/activate && pip install -r backend/requirements.txt"
