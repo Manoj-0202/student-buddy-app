@@ -10,7 +10,8 @@ import json
 import random
  
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
+CORS(app, resources={r"/generate":{"origins":"*"}})
  
 # Load models once at startup
 print("⚙️ Initializing models...")
@@ -89,8 +90,11 @@ def generate_mcqs():
     print(f"\n✅ Generated {len(final_mcqs)} MCQs.")
     return jsonify(final_mcqs)
  
+# if __name__ == '__main__':
+#     print("🚀 Running on http://0.0.0.0:5000")
+#     app.run(debug=True)
 if __name__ == '__main__':
-    print("🚀 Running on http://127.0.0.1:5000")
-    app.run(debug=True)
+    print("🚀 Running on http://0.0.0.0:5000")
+    app.run(host="0.0.0.0", port=5000, debug=True)
  
  
