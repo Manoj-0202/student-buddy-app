@@ -25,7 +25,7 @@ docker-compose.yml
 # Ignore test directories and files
 tests/
 *.log
-
+venv/
 # Ignore coverage files
 .coverage
 *.coveragerc

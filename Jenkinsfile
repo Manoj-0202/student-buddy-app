@@ -28,17 +28,17 @@ pipeline {
                         sh 'cd frontend-new && npm install'
                     }
                 }
-                stage('Backend Dependency') {
-                    steps {
-                        sh '''
-                            cd backend/
-                            pwd
-                            python3 -m venv backend/venv
-                            bash -c ". backend/venv/bin/activate && pip install --upgrade pip"
-                            bash -c ". backend/venv/bin/activate && pip install -r requirements.txt"
-                        '''
-                    }
-                }
+                // stage('Backend Dependency') {
+                //     steps {
+                //         sh '''
+                //             cd backend/
+                //             pwd
+                //             python3 -m venv backend/venv
+                //             bash -c ". backend/venv/bin/activate && pip install --upgrade pip"
+                //             bash -c ". backend/venv/bin/activate && pip install -r requirements.txt"
+                //         '''
+                //     }
+                // }
             }
         }
 
