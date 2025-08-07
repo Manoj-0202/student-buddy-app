@@ -21,6 +21,11 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Installing Dependencies') {
             parallel {
                 stage('Frontend Dependency') {
@@ -33,9 +38,9 @@ pipeline {
                 //         sh '''
                 //             cd backend/
                 //             pwd
-                //             python3 -m venv backend/venv
-                //             bash -c ". backend/venv/bin/activate && pip install --upgrade pip"
-                //             bash -c ". backend/venv/bin/activate && pip install -r requirements.txt"
+                //             python3 -m venv venv
+                //             bash -c ". venv/bin/activate && pip install --upgrade pip"
+                //             bash -c ". venv/bin/activate && pip install -r requirements.txt"
                 //         '''
                 //     }
                 // }
@@ -87,7 +92,6 @@ pipeline {
                         echo pushing frontend application
                         docker push ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER}
                         echo pushing backend application
-                        docker push ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER}
                     '''
                 }
             }
