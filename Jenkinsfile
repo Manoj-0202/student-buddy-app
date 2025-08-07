@@ -142,11 +142,12 @@ pipeline {
         //     }
         // }
         post {
-        always {
-            script {
-                def color = COLOR_MAP[currentBuild.currentResult] ?: '#FFFFFF'
-                def message = "Pipeline ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}"
-                slackSend channel: '#student_app', color: color, message: message
+            always {
+                script {
+                    def color = COLOR_MAP[currentBuild.currentResult] ?: '#FFFFFF'
+                    def message = "Pipeline ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}"
+                    slackSend channel: '#student_app', color: color, message: message
+                }
             }
         }
     }
