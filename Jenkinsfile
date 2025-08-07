@@ -31,6 +31,8 @@ pipeline {
                 stage('Backend Dependency') {
                     steps {
                         sh '''
+                            ls -lrt
+                            pwd
                             cd ../
                             cd backend/
                             python3 -m venv backend/venv
