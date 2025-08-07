@@ -21,11 +21,6 @@ pipeline {
     }
 
     stages {
-        stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
         stage('Installing Dependencies') {
             parallel {
                 stage('Frontend Dependency') {
