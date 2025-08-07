@@ -30,7 +30,10 @@ pipeline {
             parallel {
                 stage('Frontend Dependency') {
                     steps {
+                        sh 'pwd'
+                        sh 'ls -lrt'
                         sh 'cd frontend-new && npm install'
+                        sh 'pwd'
                     }
                 }
                 // stage('Backend Dependency') {
