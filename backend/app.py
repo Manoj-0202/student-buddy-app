@@ -12,8 +12,8 @@ import random
 app = Flask(__name__)
 
 # Updated CORS configuration: allowing all origins for all routes
-# CORS(app, resources={r"/*": {"origins": "*"}})
-CORS(app, resources={r"/*": {"origins": "http://frontend:3000"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, resources={r"/*": {"origins": "http://frontend:3000"}})
 
 
 # Load models once at startup
