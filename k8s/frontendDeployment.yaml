@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: myapp
+  namespace: dev-student-app
   labels:
     app: frontend
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: your-frontend-image:latest  # Change this to your real image
+          image: myusername/student_frontend:10  # Change this to your real image
           ports:
             - containerPort: 3000
           env:

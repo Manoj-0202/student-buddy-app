@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: myapp
+  namespace: dev-student-app
   labels:
     app: backend
 spec:
@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
         - name: backend
-          image: your-backend-image:latest   # Change this to your real image
+          image: myusername/student_backend:12   # Change this to your real image
           ports:
             - containerPort: 5000
-          env:
+          # env:
             # Add your ENV variables here
             # - name: ENV_VAR
             #   value: value

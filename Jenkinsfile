@@ -60,7 +60,7 @@ pipeline {
                         sh 'echo ${SONAR_HOME}'
                         sh '''
                             ${SONAR_HOME}/sonar-scanner \
-                                -Dsonar.projectKey=student_app \
+                                -Dsonar.projectKey=student-buddy-app \
                                 -Dsonar.sources=./frontend-new/ \
                                 -Dsonar.host.url=http://localhost:9000 \
                                 -Dsonar.login=${SONAR_ID}
@@ -90,8 +90,73 @@ pipeline {
                         echo pushing frontend application
                         docker push ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER}
                         echo pushing backend application
+                        docker push ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER}
                     '''
                 }
+            }
+        }
+
+        stage('Trivy Docker Imgage Scan') {
+            steps {
+                sh '''
+                    trivy image ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} \
+                    --severity LOW,MEDIUM,HIGH \
+                    --exit-code 0 \
+                    --quiet \
+                    --format json -o student_frontend_trivy_MEDIUM_result.json
+
+                    trivy image ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} \
+                    --severity CRITICAL \
+                    --exit-code 0 \
+                    --quiet \
+                    --format json -o student_frontend_trivy_CRITICAL_result.json
+                '''
+            }
+            post {
+                always {
+                    sh '''
+                        trivy convert \
+                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                            --output student_frontend_trivy_MEDIUM_result.html student_frontend_trivy_MEDIUM_result.json
+
+                        trivy convert \
+                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                            --output student_frontend_trivy_CRITICAL_result.html student_frontend_trivy_CRITICAL_result.json
+
+                        trivy convert \
+                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                            --output student_backend_trivy_MEDIUM_result.html student_backend_trivy_MEDIUM_result.json
+                        
+                        trivy convert \
+                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                            --output student_backend_trivy_CRITICAL_result.html student_backend_trivy_CRITICAL_result.json
+                        
+                    '''
+                }
+            }
+        }
+        stage('Update Image Tags') {
+            steps {
+                script {
+                    // Define image tags based on Docker username and image names
+                    def frontendImageTag = "${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER}"
+                    def backendImageTag = "${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER}"
+
+                    // Update frontend image tag in frontendDeployment.yaml
+                    sh """
+                        sed -i 's|image: .*/${DOCKER_FRONT_IMAGE_NAME}.*|image: ${frontendImageTag}|' frontendDeployment.yaml
+                    """
+
+                    // Update backend image tag in backendDeployment.yaml
+                    sh """
+                        sed -i 's|image: .*/${DOCKER_BACK_IMAGE_NAME}.*|image: ${backendImageTag}|' backendDeployment.yaml
+                    """
+                }
+            }
+        }
+        stage('Deploy in K8s') {
+            steps {
+                sh 'kubectl apply -f ./k8s -n dev-student-app'
             }
         }
     }
