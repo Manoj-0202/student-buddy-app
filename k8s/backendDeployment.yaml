@@ -6,7 +6,7 @@ metadata:
   labels:
     app: backend
 spec:
-  replicas: 2  # Number of pods for the backend service
+  replicas: 1  # Number of pods for the backend service
   selector:
     matchLabels:
       app: backend
@@ -24,19 +24,19 @@ spec:
           #   requests:
           #     cpu: "100m"
           #     memory: "256Mi"  # Memory request to ensure sufficient memory
-          readinessProbe:
-            httpGet:
-              path: /health  # Health check path
-              port: 5000      # Health check port
-            initialDelaySeconds: 20  # Increased delay before checking readiness
-            periodSeconds: 10        # Interval to check readiness
-            failureThreshold: 3      # Number of failures before considering the pod unhealthy
-            timeoutSeconds: 3        # Timeout for the health check
-          livenessProbe:
-            httpGet:
-              path: /health  # Health check path for liveness probe
-              port: 5000      # Health check port
-            initialDelaySeconds: 30  # Increased delay before starting liveness probe
-            periodSeconds: 20        # Interval to check liveness
-            failureThreshold: 3      # Number of failures before restarting the container
-            timeoutSeconds: 5        # Timeout for the liveness check
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health  # Health check path
+          #     port: 5000      # Health check port
+          #   initialDelaySeconds: 20  # Increased delay before checking readiness
+          #   periodSeconds: 10        # Interval to check readiness
+          #   failureThreshold: 3      # Number of failures before considering the pod unhealthy
+          #   timeoutSeconds: 3        # Timeout for the health check
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health  # Health check path for liveness probe
+          #     port: 5000      # Health check port
+          #   initialDelaySeconds: 30  # Increased delay before starting liveness probe
+          #   periodSeconds: 20        # Interval to check liveness
+          #   failureThreshold: 3      # Number of failures before restarting the container
+          #   timeoutSeconds: 5        # Timeout for the liveness check

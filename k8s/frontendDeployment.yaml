@@ -6,7 +6,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -20,10 +20,10 @@ spec:
           image: myusername/student_frontend:10  # Change this to your real image
           ports:
             - containerPort: 3000
-          env:
-            # Example: React app backend url
-            - name: REACT_APP_API_URL
-              value: "http://backend.myapp.svc.cluster.local:5000"
+          # env:
+          #   # Example: React app backend url
+          #   - name: REACT_APP_API_URL
+          #     value: "http://backend.myapp.svc.cluster.local:5000"
           resources:
             requests:
               cpu: "50m"
