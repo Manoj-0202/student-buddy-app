@@ -17,29 +17,26 @@ spec:
     spec:
       containers:
         - name: backend
-          image: myusername/student_backend:12  # Change this to your real image
+          image: vanthiyadevan4g/student_backend:15  # Replace with your actual image name
           ports:
             - containerPort: 5000  # Port your app is listening on
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
+          # resources:
+          #   requests:
+          #     cpu: "100m"
+          #     memory: "256Mi"  # Memory request to ensure sufficient memory
           readinessProbe:
             httpGet:
               path: /health  # Health check path
               port: 5000      # Health check port
-            initialDelaySeconds: 5  # Delay before starting to check health
-            periodSeconds: 10       # Interval to check health
-            failureThreshold: 3     # Number of failures before considering the pod unhealthy
-            timeoutSeconds: 3       # Timeout for the health check
+            initialDelaySeconds: 20  # Increased delay before checking readiness
+            periodSeconds: 10        # Interval to check readiness
+            failureThreshold: 3      # Number of failures before considering the pod unhealthy
+            timeoutSeconds: 3        # Timeout for the health check
           livenessProbe:
             httpGet:
               path: /health  # Health check path for liveness probe
               port: 5000      # Health check port
-            initialDelaySeconds: 15  # Delay before starting to check liveness
+            initialDelaySeconds: 30  # Increased delay before starting liveness probe
             periodSeconds: 20        # Interval to check liveness
             failureThreshold: 3      # Number of failures before restarting the container
             timeoutSeconds: 5        # Timeout for the liveness check
