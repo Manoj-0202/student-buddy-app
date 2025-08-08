@@ -135,12 +135,12 @@ pipeline {
 
                     // Update frontend image tag in frontendDeployment.yaml
                     sh """
-                        sed -i 's|image: .*/${DOCKER_FRONT_IMAGE_NAME}.*|image: ${frontendImageTag}|' frontendDeployment.yaml
+                        sed -i 's|image: .*/${DOCKER_FRONT_IMAGE_NAME}.*|image: ${frontendImageTag}|' ./k8s/frontendDeployment.yaml
                     """
 
                     // Update backend image tag in backendDeployment.yaml
                     sh """
-                        sed -i 's|image: .*/${DOCKER_BACK_IMAGE_NAME}.*|image: ${backendImageTag}|' backendDeployment.yaml
+                        sed -i 's|image: .*/${DOCKER_BACK_IMAGE_NAME}.*|image: ${backendImageTag}|' ./k8s/backendDeployment.yaml
                     """
                 }
             }
