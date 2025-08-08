@@ -28,7 +28,7 @@ const ChemistryUpload = () => {
     formData.append('num_questions', questionCount);
 
     try {
-      const response = await fetch('http://localhost:5000/generate', {
+      const response = await fetch('http://backend:5000/generate', {
         method: 'POST',
         body: formData,
       });
