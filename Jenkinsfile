@@ -122,15 +122,6 @@ pipeline {
                         trivy convert \
                             --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
                             --output student_frontend_trivy_CRITICAL_result.html student_frontend_trivy_CRITICAL_result.json
-
-                        trivy convert \
-                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
-                            --output student_backend_trivy_MEDIUM_result.html student_backend_trivy_MEDIUM_result.json
-                        
-                        trivy convert \
-                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
-                            --output student_backend_trivy_CRITICAL_result.html student_backend_trivy_CRITICAL_result.json
-                        
                     '''
                 }
             }
