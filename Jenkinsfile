@@ -157,7 +157,19 @@ pipeline {
             script {
                 def color = COLOR_MAP[currentBuild.currentResult] ?: '#FFFFFF'
                 def message = "Pipeline ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}"
-                slackSend channel: '#student_app', color: color, message: message
+                slackSend(
+                    baseUrl: 'https://slack.com/api',
+                    teamDomain: 'DevOpsWolf',
+                    channel: '#student_app',
+                    color: color,
+                    botUser: true,
+                    tokenCredentialId: 'slack',
+                    notifyCommitters: false,
+                    iconEmoji: ':rocket:',
+                    username: 'JenkinsBot',
+                    timestamp: "${System.currentTimeMillis()}",
+                    message: message
+                )
             }
         }
     }
