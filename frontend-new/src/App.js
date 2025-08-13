@@ -13,6 +13,10 @@ import ChemistryUpload from './uploads/chemistry-upload';
 import ChemistryTest from './tests/chemistry-test';
 import Physics from './subjects/physics';
 import Maths from './subjects/maths';
+import Context from './subjects/context';
+import PreQnA from './components/preqna';
+import Transcript from './components/transcript';
+import McqTest from './tests/mcqtest';
 
 function App() {
   return (
@@ -28,6 +32,10 @@ function App() {
             <Route path="/chemistry-test" element={<ChemistryTest />} />
             <Route path='/subjects/physics' element = {<Physics/>} />
             <Route path='/subjects/maths' element = {<Maths/>} />
+            <Route path="/subjects/context" element={<Context />} /> 
+            <Route path="/preqna" element={<PreQnA />} /> 
+            <Route path="/transcript" element={<Transcript />} /> 
+            <Route path="/mcqtest" element={<McqTest />} /> 
           </Routes>
         </main>
       </div>

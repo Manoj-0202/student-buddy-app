@@ -1,0 +1,11 @@
+Flask
+flask_cors
+scikit-learn
+nltk
+sentence-transformers
+PyPDF2
+openai-whisper
+soundfile
+transformers
+torch
+sentencepiece

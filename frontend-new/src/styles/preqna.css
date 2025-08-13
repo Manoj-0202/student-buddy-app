@@ -1,0 +1,57 @@
+.preqna-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.preqna-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.mcq-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.mcq-item h3 {
+  color: #0056b3;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.mcq-item ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mcq-item ul li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+  color: #555;
+}
+
+.mcq-item ul li:last-child {
+  border-bottom: none;
+}
+
+.mcq-item p strong {
+  color: #28a745;
+}
+
+.correct-answer {
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
