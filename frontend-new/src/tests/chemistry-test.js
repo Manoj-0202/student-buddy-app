@@ -11,6 +11,9 @@ const ChemistryTest = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState({});
+  const [showScorecard, setShowScorecard] = useState(false);
 
   const currentQuestion = qnaPairs[currentIndex];
 
@@ -18,6 +21,10 @@ const ChemistryTest = () => {
     if (!isAnswered) {
       setSelectedOption(key);
       setIsAnswered(true);
+      setUserAnswers(prev => ({ ...prev, [currentIndex]: key }));
+      if (key === currentQuestion.answer) {
+        setScore(prev => prev + 1);
+      }
     }
   };
 
@@ -26,6 +33,8 @@ const ChemistryTest = () => {
       setCurrentIndex((prev) => prev + 1);
       setSelectedOption(null);
       setIsAnswered(false);
+    } else {
+      setShowScorecard(true);
     }
   };
 
@@ -37,9 +46,56 @@ const ChemistryTest = () => {
     }
   };
 
+  const handleRestart = () => {
+    setCurrentIndex(0);
+    setSelectedOption(null);
+    setIsAnswered(false);
+    setScore(0);
+    setUserAnswers({});
+    setShowScorecard(false);
+  };
+
   const handleBack = () => {
     navigate('/chemistry-upload-mcq');
   };
+
+  if (showScorecard) {
+    return (
+      <div className="test-container py-5">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+              <div className="card test-card p-4 shadow-sm">
+                <div className="card-body text-center">
+                  <h1 className="card-title">Test Complete!</h1>
+                  <h2 className="mb-4">Your Score: {score} / {qnaPairs.length}</h2>
+                  <div className="d-flex justify-content-center">
+                    <button className="btn btn-primary me-3" onClick={handleRestart}>Retake Test</button>
+                    <button className="btn btn-secondary" onClick={handleBack}>Create Another Quiz</button>
+                  </div>
+                  <hr />
+                  <h3 className="mt-4">Review Your Answers</h3>
+                  <div className="text-start">
+                    {qnaPairs.map((q, index) => (
+                      <div key={index} className="mb-3 p-2 border rounded">
+                        <p><strong>Q{index + 1}: {q.question}</strong></p>
+                        <p className={userAnswers[index] === q.answer ? 'text-success' : 'text-danger'}>
+                          Your answer: {q.options[userAnswers[index]]}
+                        </p>
+                        {userAnswers[index] !== q.answer && (
+                          <p className="text-success">Correct answer: {q.options[q.answer]}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="test-container py-5">
@@ -85,8 +141,10 @@ const ChemistryTest = () => {
                     )}
 
                     <div className="d-flex justify-content-between mt-4">
-                      <button className="btn btn-secondary" onClick={handlePrev} disabled={currentIndex === 0}> <i className='fa-solid fa-angle-left'></i> Previous</button>
-                      <button className="btn btn-primary" onClick={handleNext} disabled={currentIndex === qnaPairs.length - 1}>Next <i className='fa-solid fa-angle-right'></i></button>
+                      <button className="btn btn-secondary" onClick={handlePrev} disabled={currentIndex === 0 || isAnswered}> <i className='fa-solid fa-angle-left'></i> Previous</button>
+                      <button className="btn btn-primary" onClick={handleNext}>
+                        {currentIndex === qnaPairs.length - 1 ? 'Finish' : 'Next'} <i className='fa-solid fa-angle-right'></i>
+                      </button>
                     </div>
                   </div>
                 ) : (

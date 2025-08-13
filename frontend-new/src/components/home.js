@@ -10,7 +10,7 @@ const Home = () => {
         <p className="home-subtitle lead">Unlock your full potential with AI-powered quizzes, personalized learning paths, and insightful progress tracking. Your journey to academic excellence starts here.</p>
         <div className="home-buttons">
           <Link to="/dashboard" className="btn btn-lg btn-primary me-3">Get Started</Link>
-          <Link to="/subjects/chemistry" className="btn btn-lg btn-outline-light">Explore Subjects</Link>
+          <Link to="/subjects/context" className="btn btn-lg btn-outline-light">Read the context and take test</Link>
         </div>
       </div>
     </div>
