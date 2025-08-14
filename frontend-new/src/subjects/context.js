@@ -36,14 +36,16 @@ const Context = () => {
 
     try {
       // Step 1: Upload file and extract text
-      const uploadRes = await axios.post("http://localhost:5000/upload", formData, {
+      // const uploadRes = await axios.post("http://localhost:5000/upload", formData, {
+      const uploadRes = await axios.post("http://api.local/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       const rawText = uploadRes.data.text;
       console.log("File uploaded successfully! Extracted text:", rawText);
 
       // Step 2: Generate MCQs from the extracted text
-      const generateRes = await axios.post('http://localhost:5000/generate', { raw_text: rawText });
+      // const generateRes = await axios.post('http://localhost:5000/generate', { raw_text: rawText });
+      const generateRes = await axios.post('http://api.local/generate', { raw_text: rawText });
       const mcqs = generateRes.data;
       console.log("MCQs generated successfully:", mcqs);
 

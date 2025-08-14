@@ -1,3 +1,4 @@
+import os
 import nltk_setup  # Ensures NLTK data is downloaded at startup
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -8,8 +9,25 @@ from analysis_utils import analyze_with_advanced_sentiment_v3_5
 
 app = Flask(__name__)
 
-# ✅ CORS configuration to allow React frontend
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+# ---- CORS (no auth: keep credentials OFF) ----
+# Configure allowed origins via env if needed: ALLOWED_ORIGINS="http://student-app.local,http://localhost:3000"
+ALLOWED_ORIGINS = [
+    o.strip() for o in os.getenv("ALLOWED_ORIGINS", "http://student-app.local").split(",") if o.strip()
+]
+
+CORS(
+    app,
+    resources={r"/*": {"origins": ALLOWED_ORIGINS}},
+    supports_credentials=False,  # ← important: no auth, so no cookies/credentials
+    methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Accept"],  # trimmed: no Authorization header since there's no auth
+    expose_headers=["Content-Length", "Content-Range"],
+    max_age=86400,  # cache preflight for a day
+)
+
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"})
 
 # 1. File Upload: Accepts .pdf or .txt, extracts text
 @app.route('/upload', methods=['POST'])
@@ -27,8 +45,8 @@ def upload_file():
 @app.route('/generate', methods=['POST'])
 def generate_mcqs_endpoint():
     data = request.get_json()
-    raw_text = data.get('raw_text')
-    num_questions = int(data.get('num_questions', 5))
+    raw_text = data.get('raw_text') if data else None
+    num_questions = int((data or {}).get('num_questions', 5))
     if not raw_text:
         return jsonify({'error': 'No text provided'}), 400
     mcqs = generate_mcqs_from_text(raw_text, num_questions)
@@ -73,13 +91,13 @@ def analyze_endpoint():
 @app.route('/generate_quiz_mcqs', methods=['POST'])
 def generate_quiz_mcqs_endpoint():
     data = request.get_json()
-    raw_text = data.get('raw_text')
-    num_questions = int(data.get('num_questions', 5))
-    excluded_questions = data.get('excluded_questions', [])
+    raw_text = data.get('raw_text') if data else None
+    num_questions = int((data or {}).get('num_questions', 5))
+    excluded_questions = (data or {}).get('excluded_questions', [])
     if not raw_text:
         return jsonify({'error': 'No text provided'}), 400
     mcqs = generate_mcqs_from_text(raw_text, num_questions, excluded_questions)
     return jsonify(mcqs)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", debug=True, port=5000)

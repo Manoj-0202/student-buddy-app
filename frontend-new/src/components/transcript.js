@@ -70,7 +70,8 @@ const Transcript = () => {
     formData.append('audio_file', audioBlob, 'recording.webm');
 
     try {
-      const response = await axios.post('http://localhost:5000/transcribe', formData, {
+      // const response = await axios.post('http://localhost:5000/transcribe', formData, {
+      const response = await axios.post('http://api.local/transcribe', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -109,7 +110,8 @@ const Transcript = () => {
     formData.append('student_text', studentText);
 
     try {
-      const response = await axios.post('http://localhost:5000/analyze', formData, {
+      // const response = await axios.post('http://localhost:5000/analyze', formData, {
+      const response = await axios.post('http://api.local/analyze', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

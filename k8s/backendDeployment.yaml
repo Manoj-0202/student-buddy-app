@@ -20,6 +20,11 @@ spec:
           image: vanthiyadevan4g/student_backend:15  # Replace with your actual image name
           ports:
             - containerPort: 5000  # Port your app is listening on
+          env:
+            - name: PORT
+              value: "5000"
+            - name: ALLOWED_ORIGINS
+              value: "http://student-app.local,http://localhost:3000"
           # resources:
           #   requests:
           #     cpu: "100m"

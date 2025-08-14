@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: student-app
+  namespace: dev-student-app
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    # Allow bigger uploads for PDFs/audio
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    # Optional: longer timeouts for transcription
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+spec:
+  rules:
+    - host: api.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 5000
+    - host: student-app.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000
