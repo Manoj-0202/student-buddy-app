@@ -29,7 +29,7 @@ const McqTest = () => {
     setScore(0);
 
     try {
-      const response = await axios.post('http://localhost:5000/generate_quiz_mcqs', {
+      const response = await axios.post('http://api.local/generate_quiz_mcqs', {
         raw_text: sourceText,
         num_questions: 5, // You can make this dynamic if needed
       });
