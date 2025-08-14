@@ -78,7 +78,7 @@ pipeline {
 
         stage('Docker Build For Backend') {
             steps {
-                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./unified_backend/Dockerfile ./backend'
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./unified_backend/Dockerfile ./unified_backend'
             }
         }
 
