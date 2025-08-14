@@ -34,7 +34,7 @@ pipeline {
                 // stage('Backend Dependency') {
                 //     steps {
                 //         sh '''
-                //             cd backend/
+                //             cd unified_backend/
                 //             pwd
                 //             python3 -m venv venv
                 //             bash -c ". venv/bin/activate && pip install --upgrade pip"
@@ -78,7 +78,7 @@ pipeline {
 
         stage('Docker Build For Backend') {
             steps {
-                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./backend/Dockerfile ./backend'
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./unified_backend/Dockerfile ./backend'
             }
         }
 
