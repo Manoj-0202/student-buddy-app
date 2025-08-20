@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Upload from "./components/upload";
 import PreQnA from "./components/preqna";
 import Analyze from "./components/analysing";
+import McqTest from "./components/mcqtest";
 
 const AppContent = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const AppContent = () => {
         <Route path="/upload" element={<Upload />} />
         <Route path="/preqna" element={<PreQnA />} /> 
         <Route path="/analysing" element={<Analyze />} /> 
+        <Route path="/mcqtest" element={<McqTest />} />
       </Routes>
       {showNavbar && <Navbar />}
     </div>

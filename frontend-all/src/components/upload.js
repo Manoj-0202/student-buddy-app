@@ -16,7 +16,7 @@ const Upload = () => {
   const handleBack = () => navigate("/");
 
   const handleUpload = async () => {
-    if ((inputType === "file" && !file) || (inputType === "text" && !text)) {
+    if ((inputType === "file" && !file) || (inputType === "text" && !text.trim())) {
       alert("Please provide a file or enter text!");
       return;
     }
@@ -27,7 +27,6 @@ const Upload = () => {
     try {
       let rawText = "";
 
-      // If file is uploaded
       if (inputType === "file") {
         const formData = new FormData();
         formData.append("file", file);
@@ -40,16 +39,11 @@ const Upload = () => {
         rawText = text;
       }
 
-      // Generate MCQs from the text
       const generateRes = await axios.post("http://localhost:5000/generate", { raw_text: rawText });
       const mcqs = generateRes.data;
 
-      console.log("MCQs generated successfully:", mcqs);
-
       setUploaded(true);
-
-      // Navigate to PreQnA page with generated MCQs
-      navigate("/preqna", { state: { mcqs: mcqs, sourceText: rawText } });
+      navigate("/preqna", { state: { mcqs, sourceText: rawText } });
     } catch (err) {
       console.error("Error during process:", err);
       setError("An error occurred during upload or MCQ generation.");
@@ -63,70 +57,68 @@ const Upload = () => {
 
   return (
     <div className="upload-container">
-      {/* Header */}
       <header className="upload-header">
-        <button className="back-btn" onClick={handleBack}>
+        <button className="back-btn" onClick={handleBack} aria-label="Back">
           <FaArrowLeft />
         </button>
-        <h2>StudyBuddy</h2>
+        <h2 className="upload-title">StudyBuddy</h2>
       </header>
 
-      {/* Card-style Intro & Upload */}
       <div className="upload-card">
-        <h3>Upload Your Study Materials</h3>
-        <p>
+        <h3 className="card-heading">Upload Your Study Materials</h3>
+        <p className="card-sub">
           Enhance your learning experience by uploading your study materials
           or entering text directly for analysis and insights.
         </p>
 
-        {/* Tabs */}
         <div className="upload-tabs">
           <button
             className={inputType === "file" ? "active-tab" : ""}
             onClick={() => setInputType("file")}
+            type="button"
           >
             Upload File
           </button>
           <button
             className={inputType === "text" ? "active-tab" : ""}
             onClick={() => setInputType("text")}
+            type="button"
           >
             Enter Text
           </button>
         </div>
 
-        {/* File Input */}
         {inputType === "file" && (
           <div className="upload-section">
             <div className="upload-box">
-              <FaUpload className="upload-icon" />
+              <FaUpload className="upload-icon" aria-hidden="true" />
               <p>{file ? file.name : "Drag & drop your file here"}</p>
               <span>or browse from your device</span>
               <input
                 type="file"
                 className="browse-input"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                accept=".pdf,.doc,.docx,.txt,.md,.rtf,.ppt,.pptx,.png,.jpg,.jpeg"
               />
             </div>
           </div>
         )}
 
-        {/* Text Input */}
         {inputType === "text" && (
           <div className="text-section">
             <textarea
               placeholder="Type or paste your study material here..."
               value={text}
               onChange={(e) => setText(e.target.value)}
-            ></textarea>
+            />
           </div>
         )}
 
-        {/* Upload / Next Button */}
         <button
           className={uploaded ? "next-btn" : "upload-btn"}
           onClick={uploaded ? handleNext : handleUpload}
           disabled={loading}
+          type="button"
         >
           {loading
             ? "Uploading..."
@@ -134,7 +126,7 @@ const Upload = () => {
             ? "Next"
             : (
               <>
-                <FaUpload style={{ marginRight: "6px" }} /> Upload
+                <FaUpload style={{ marginRight: 6 }} aria-hidden="true" /> Upload
               </>
             )}
         </button>

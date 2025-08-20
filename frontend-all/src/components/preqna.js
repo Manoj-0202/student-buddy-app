@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa"; // Import icon
+import { FaArrowLeft } from "react-icons/fa";
 import "../styles/preqna.css";
 
 const getLetter = (index) => String.fromCharCode(65 + index);
@@ -17,12 +17,8 @@ const resolveCorrectLetter = (q) => {
     return getLetter(idx);
   };
 
-  const fields = [
-    q.answer,
-    q.correctAnswer,
-    q.correct,
-    q.answerLetter,
-  ].filter((v) => v !== undefined && v !== null);
+  const fields = [q.answer, q.correctAnswer, q.correct, q.answerLetter]
+    .filter((v) => v !== undefined && v !== null);
 
   for (const val of fields) {
     if (typeof val === "string") {
@@ -39,8 +35,7 @@ const resolveCorrectLetter = (q) => {
     }
   }
 
-  const numeric =
-    q.answerIndex ?? q.correctIndex ?? q.correctOptionIndex ?? null;
+  const numeric = q.answerIndex ?? q.correctIndex ?? q.correctOptionIndex ?? null;
   const letterByIndex = pickByIndex(numeric);
   if (letterByIndex) return letterByIndex;
 
@@ -67,16 +62,12 @@ const PreQnA = () => {
     return (
       <div className="preqna-page">
         <div className="preqna-header">
-          <button
-            className="back-btn"
-            onClick={() => navigate(-1)}
-            aria-label="Go back"
-          >
+          <button className="back-btn" onClick={() => navigate(-1)} aria-label="Go back">
             <FaArrowLeft />
           </button>
-          <h3 className="pretest-title">Pre–Test</h3>
-          <div></div>
+          <h3 className="pretest-title">Pre-Test</h3>
         </div>
+
         <div className="preqna-empty">
           <h2>No MCQs available</h2>
           <p>Please go back and generate MCQs from a file.</p>
@@ -96,15 +87,10 @@ const PreQnA = () => {
   return (
     <div className="preqna-page">
       <div className="preqna-header">
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-          aria-label="Go back"
-        >
+        <button className="back-btn" onClick={() => navigate(-1)} aria-label="Go back">
           <FaArrowLeft />
         </button>
-        <h3 className="pretest-title">Pre-Test</h3>
-        <div></div>
+        <h3 className="pretest-title">Pre–Test</h3>
       </div>
 
       <div className="preqna-card">
