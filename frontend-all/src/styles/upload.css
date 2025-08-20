@@ -1,0 +1,166 @@
+.upload-container {
+  font-family: "Poppins", sans-serif;
+  max-width: 420px;
+  height: 100vh;
+  margin: auto;
+  padding: 1rem;
+  background: #f5f5f5;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Header */
+.upload-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.back-btn {
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  margin-right: 0.4rem;
+  cursor: pointer;
+  color: #444;
+}
+.back-btn:hover {
+  color: #ff7a00;
+}
+.upload-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+  margin-right: 1.5rem;
+}
+
+/* Card-style intro */
+.upload-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.upload-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.upload-card p {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Tabs */
+.upload-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.upload-tabs button {
+  flex: 1;
+  padding: 0.45rem 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.upload-tabs button.active-tab {
+  background: #ff7a00;
+  color: #fff;
+  border-color: #ff7a00;
+}
+.upload-tabs button:hover:not(.active-tab) {
+  background: #f3f3f3;
+}
+
+/* Upload Section */
+.upload-section {
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.upload-box {
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  padding: 1.2rem 0.8rem;
+  text-align: center;
+  background: #fafafa;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+.upload-box:hover {
+  border-color: #ff7a00;
+  background: #fff7f0;
+}
+.upload-box p {
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+.upload-box span {
+  font-size: 0.7rem;
+  color: #777;
+}
+.upload-icon {
+  font-size: 1.5rem;
+  color: #ff7a00;
+}
+.browse-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Textarea */
+.text-section textarea {
+  width: 100%;
+  height: 90px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 0.7rem;
+  resize: none;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+.text-section textarea:focus {
+  border-color: #ff7a00;
+  box-shadow: 0 0 4px rgba(255, 122, 0, 0.3);
+}
+
+/* Buttons */
+.upload-btn,
+.next-btn {
+  background: #ff7a00;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+}
+.upload-btn:hover,
+.next-btn:hover {
+  background: #e96b00;
+}
