@@ -17,8 +17,9 @@ const resolveCorrectLetter = (q) => {
     return getLetter(idx);
   };
 
-  const fields = [q.answer, q.correctAnswer, q.correct, q.answerLetter]
-    .filter((v) => v !== undefined && v !== null);
+  const fields = [q.answer, q.correctAnswer, q.correct, q.answerLetter].filter(
+    (v) => v !== undefined && v !== null
+  );
 
   for (const val of fields) {
     if (typeof val === "string") {
@@ -119,9 +120,7 @@ const PreQnA = () => {
                   className={isSelected ? "selected" : ""}
                   onClick={() => setSelectedOption(optionLetter)}
                 >
-                  <span className="radio-btn">
-                    {isSelected && <span className="inner-circle" />}
-                  </span>
+                  <span className="radio-btn">{isSelected && <span className="inner-circle" />}</span>
                   <span className="option-text">{option}</span>
                 </li>
               );

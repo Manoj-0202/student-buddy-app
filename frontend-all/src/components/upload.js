@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaArrowLeft, FaUpload } from "react-icons/fa";
+import { FaArrowLeft, FaUpload, FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { uploadFile, generateMcqs } from "../services/api";
 import "../styles/upload.css";
 
 const Upload = () => {
@@ -12,12 +12,14 @@ const Upload = () => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [generatedMcqs, setGeneratedMcqs] = useState(null);
+  const [generatedSourceText, setGeneratedSourceText] = useState(null);
 
   const handleBack = () => navigate("/");
 
   const handleUpload = async () => {
     if ((inputType === "file" && !file) || (inputType === "text" && !text.trim())) {
-      alert("Please provide a file or enter text!");
+      setError("Please provide a file or enter text!");
       return;
     }
 
@@ -28,32 +30,34 @@ const Upload = () => {
       let rawText = "";
 
       if (inputType === "file") {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const uploadRes = await axios.post("http://localhost:5000/upload", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        const uploadRes = await uploadFile(file);
         rawText = uploadRes.data.text;
       } else {
         rawText = text;
       }
 
-      const generateRes = await axios.post("http://localhost:5000/generate", { raw_text: rawText });
+      const generateRes = await generateMcqs(rawText);
       const mcqs = generateRes.data;
 
+      setGeneratedMcqs(mcqs);
+      setGeneratedSourceText(rawText);
       setUploaded(true);
-      navigate("/preqna", { state: { mcqs, sourceText: rawText } });
     } catch (err) {
       console.error("Error during process:", err);
       setError("An error occurred during upload or MCQ generation.");
-      alert("An error occurred. Please check the console for details.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleNext = () => navigate("/learning");
+  const handleNext = () => {
+    if (generatedMcqs && generatedSourceText) {
+      navigate("/preqna", { state: { mcqs: generatedMcqs, sourceText: generatedSourceText } });
+    } else {
+      // This case should ideally not be reached if 'uploaded' is true
+      setError("No generated content to proceed with.");
+    }
+  };
 
   return (
     <div className="upload-container">
@@ -90,7 +94,7 @@ const Upload = () => {
 
         {inputType === "file" && (
           <div className="upload-section">
-            <div className="upload-box">
+            <div className={`upload-box ${file ? 'file-selected' : ''}`}>
               <FaUpload className="upload-icon" aria-hidden="true" />
               <p>{file ? file.name : "Drag & drop your file here"}</p>
               <span>or browse from your device</span>
@@ -121,14 +125,10 @@ const Upload = () => {
           type="button"
         >
           {loading
-            ? "Uploading..."
+            ? (<><FaSpinner className="spinner" /> Uploading...</>)
             : uploaded
             ? "Next"
-            : (
-              <>
-                <FaUpload style={{ marginRight: 6 }} aria-hidden="true" /> Upload
-              </>
-            )}
+            : "Upload"}
         </button>
 
         {error && <p className="error-msg">{error}</p>}

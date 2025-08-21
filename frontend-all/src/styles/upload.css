@@ -44,35 +44,58 @@ body { margin: 0; background: var(--bg); color: var(--text); }
   background: var(--bg);
 }
 
-/* ========== HEADER (centered title, back on left) ========== */
+/* ========== HEADER (centered title, back on left — perfectly aligned) ========== */
 .upload-header{
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px; /* left icon, centered title, right spacer */
   align-items: center;
-  justify-content: center;  /* center the title */
-  min-height: 40px;
+  justify-items: center;
+  min-height: 48px;
+  position: relative;
 }
+
+/* right-side spacer so the title stays truly centered */
+.upload-header::after{
+  content: "";
+}
+
 .back-btn{
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
+  grid-column: 1 / 2;
+  justify-self: start;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
   background: transparent;
   border: none;
   cursor: pointer;
   color: #444;
-  padding: 6px;
+  border-radius: 10px;
+  padding: 0;
   line-height: 1;
+  font-size: 20px;
+  transition: background .18s ease, transform .04s ease, color .18s ease;
 }
 .back-btn:hover{ color: var(--accent); }
+.back-btn:active{ transform: translateY(1px); }
 
 .upload-title{
+  grid-column: 2 / 3;
+  justify-self: center;
   font-size: var(--fs-brand);
   font-weight: 600;
   margin: 0;
   text-align: center;
   user-select: none;
+}
+
+/* responsive header sizing on tiny phones */
+@media (max-width: 360px){
+  .upload-header{
+    grid-template-columns: 32px 1fr 32px;
+    min-height: 44px;
+  }
+  .back-btn{ width: 32px; height: 32px; font-size: 18px; }
 }
 
 /* ========== CARD ========== */
@@ -141,6 +164,12 @@ body { margin: 0; background: var(--bg); color: var(--text); }
   border-color: var(--accent);
   background: #fff7f0;
 }
+
+.upload-box.file-selected {
+  border-color: #4CAF50; /* Green border */
+  background: #e6ffe6; /* Light green background */
+}
+
 .upload-icon{
   font-size: clamp(22px, 3vw, 26px);
   color: var(--accent);
@@ -203,6 +232,14 @@ body { margin: 0; background: var(--bg); color: var(--text); }
 .upload-btn:disabled, .next-btn:disabled{
   opacity: .7;
   cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* ========== ERROR ========== */

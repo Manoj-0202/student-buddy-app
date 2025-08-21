@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import "../styles/home.css";
+import ActionCard from "./ActionCard";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -41,25 +42,25 @@ const Home = () => {
       <section>
         <h3 className="section-title">Quick Actions</h3>
         <div className="quick-actions">
-          <button className="action-card" type="button">
-            <img src="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_l8ygn0.jpg" alt="Pre-Test" />
-            <span className="action-label">Pre-Test</span>
-          </button>
+          <ActionCard
+            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_l8ygn0.jpg"
+            title="Pre-Test"
+          />
 
-          <button className="action-card" type="button">
-            <img src="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_1_sehooy.jpg" alt="AI Understanding" />
-            <span className="action-label">AI Understanding</span>
-          </button>
+          <ActionCard
+            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_1_sehooy.jpg"
+            title="AI Understanding"
+          />
 
-          <button className="action-card" type="button">
-            <img src="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_2_jv7zid.jpg" alt="Final Test" />
-            <span className="action-label">Final Test</span>
-          </button>
+          <ActionCard
+            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_2_jv7zid.jpg"
+            title="Final Test"
+          />
 
-          <button className="action-card" type="button">
-            <img src="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_3_az9hct.jpg" alt="Practice" />
-            <span className="action-label">Practice</span>
-          </button>
+          <ActionCard
+            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_3_az9hct.jpg"
+            title="Practice"
+          />
         </div>
       </section>
 

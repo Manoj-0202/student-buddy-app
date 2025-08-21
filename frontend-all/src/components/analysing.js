@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { transcribeAudio, analyzeText } from "../services/api";
 import { FaArrowLeft } from "react-icons/fa";
 import { FiMic, FiMicOff } from "react-icons/fi";
 import "../styles/analysing.css";
@@ -70,9 +70,7 @@ const Analyze = () => {
     try {
       const fd = new FormData();
       fd.append("audio_file", audioBlob, "recording.webm");
-      const tr = await axios.post("http://localhost:5000/transcribe", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const tr = await transcribeAudio(fd);
       const transcribed = tr?.data?.transcript || "";
       setStudentText(transcribed);
       await handleAnalyze(transcribed);
@@ -95,13 +93,7 @@ const Analyze = () => {
     setAnalysisResult(null);
 
     try {
-      const fd = new FormData();
-      fd.append("source_file", new Blob([sourceText], { type: "text/plain" }), "source.txt");
-      fd.append("student_text", text);
-
-      const res = await axios.post("http://localhost:5000/analyze", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await analyzeText(sourceText, text);
 
       console.log("Analyze response:", res.data);
       setAnalysisResult(res.data || {});

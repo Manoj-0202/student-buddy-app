@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { generateQuizMcqs } from "../services/api";
 import "../styles/mcqtest.css";
 
 import { FaArrowLeft } from "react-icons/fa";
@@ -28,10 +28,7 @@ const McqTest = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await axios.post("http://localhost:5000/generate_quiz_mcqs", {
-          raw_text: sourceText,
-          num_questions: 5,
-        });
+        const res = await generateQuizMcqs(sourceText, 5);
         setMcqs(res.data || []);
         setCurrentIdx(0);
         setUserAnswers({});
@@ -45,8 +42,7 @@ const McqTest = () => {
       }
     };
     autoStart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sourceText]);
 
   const handleOptionSelect = (questionNumber, selectedOptionLetter) => {
     setUserAnswers((prev) => ({ ...prev, [questionNumber]: selectedOptionLetter }));

@@ -31,7 +31,7 @@ body{ margin:0; background:var(--bg); color:var(--text); }
   padding: var(--gap-2);
   max-width: 480px;
   margin: 0 auto;
-  padding-bottom: 56px; /* space for bottom navbar */
+  padding-bottom: var(--navbar-height); /* space for bottom navbar */
 }
 
 /* ==== Header: brand centered, gear pinned right ==== */
