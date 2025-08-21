@@ -47,7 +47,8 @@
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0.8rem; /* Added for spacing */
   padding-bottom: 0.3rem; /* 4.8px */
   background: linear-gradient(var(--bg) 80%, transparent);
 }
@@ -55,11 +56,12 @@
   font-size: var(--fs-h1);
   font-weight: 600;
   margin: 0.4rem 0 0.5rem; /* 6.4px 0 8px */
+  flex: 1;
+  text-align: center;
 }
+
+
 .icon-btn {
-  position: absolute;
-  left: 0.4rem; /* 6.4px */
-  top: 0.3rem; /* 4.8px */
   background: none;
   border: 0;
   padding: 0.4rem; /* 6.4px */
@@ -93,6 +95,9 @@
   line-height: 1.5;
   margin: 0 0.1rem 0.8rem; /* 0 1.6px 12.8px */
   font-size: var(--fs-body);
+  max-height: 8rem; /* Limit height */
+  overflow-y: auto; /* Add scrollbar if content overflows */
+  padding-right: 0.5rem; /* Space for scrollbar */
 }
 
 /* ====== Options ====== */
@@ -159,6 +164,8 @@
   font-size: var(--fs-body);
   color: #1e1b18;
   line-height: 1.3;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* ====== CTAs ====== */
@@ -261,7 +268,8 @@
 .result-ctas {
   display: flex;
   gap: 0.5rem; /* 8px */
-  margin-top: 0.7rem; /* 11.2px */
+  margin-top: 0.7rem;
+  margin-bottom: 2rem; /* 11.2px */
 }
 
 /* ====== Helpers ====== */
@@ -335,4 +343,18 @@
   .result-score {
     font-size: 2rem;
   }
+}
+/* ====== Loading Overlay ====== */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  z-index: 9999; /* Ensure it's on top of other content */
+  text-align: center;
 }

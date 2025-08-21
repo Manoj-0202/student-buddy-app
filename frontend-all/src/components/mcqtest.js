@@ -80,7 +80,15 @@ const McqTest = () => {
         <h2>Final Test</h2>
       </div>
 
-      {loading && <p className="subtle">Generating Test…</p>}
+      {loading && (
+        <div className="loading-overlay">
+          <p className="subtle">
+            Generating insightful questions...
+            <br />
+            Please wait a moment.
+          </p>
+        </div>
+      )}
       {error && <p className="error">{error}</p>}
 
       {!loading && !error && mcqs.length > 0 && !submitted && (

@@ -1,6 +1,6 @@
 /* Base */
 .an-root {
-  max-width: 100%; /* Use percentage for full width */
+  width: 100%; /* Use percentage for full width */
   margin: 0 auto;
   padding: clamp(0.8rem, 3.2vw, 1.2rem); /* Use rem and clamp */
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -44,6 +44,12 @@
   padding: clamp(0.7rem, 2.8vw, 1rem); /* Use rem and clamp */
   border: 1px solid #eee7e2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  overflow-x: auto; /* Added for horizontal scrolling */
+}
+
+.an-list li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Textarea */
@@ -267,7 +273,6 @@
 
 @media (min-width: 768px) {
   .an-root {
-    max-width: 720px;
     padding: 1.6rem;
   }
   .an-top h2 {
@@ -310,15 +315,9 @@
 }
 
 @media (min-width: 1024px) {
-  .an-root {
-    max-width: 960px;
-  }
 }
 
 @media (min-width: 1280px) {
-  .an-root {
-    max-width: 1200px;
-  }
   .an-top h2 {
     font-size: 1.6rem;
   }
@@ -357,4 +356,3 @@
     font-size: 0.9rem;
   }
 }
-

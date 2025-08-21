@@ -5,6 +5,7 @@
   align-items: center;
   padding: clamp(0.8rem, 3.2vw, 1.2rem) clamp(0.7rem, 2.8vw, 1rem) clamp(1.4rem, 5.6vw, 2rem);
   background: #fdfaf6;
+  min-height: 100vh; /* Ensure background covers full viewport height */
 }
 
 .preqna-header {
