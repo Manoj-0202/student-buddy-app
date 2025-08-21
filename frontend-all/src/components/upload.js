@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FaArrowLeft, FaUpload, FaSpinner } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaArrowLeft, FaUpload } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { uploadFile, generateMcqs } from "../services/api";
 import "../styles/upload.css";
@@ -14,6 +14,28 @@ const Upload = () => {
   const [error, setError] = useState(null);
   const [generatedMcqs, setGeneratedMcqs] = useState(null);
   const [generatedSourceText, setGeneratedSourceText] = useState(null);
+  const [loadingMessage, setLoadingMessage] = useState("Uploading...");
+
+  const loadingMessages = [
+    "Uploading file...",
+    "Processing file...",
+    "Generating questions...",
+    "Almost there...",
+  ];
+
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      interval = setInterval(() => {
+        setLoadingMessage((prevMessage) => {
+          const currentIndex = loadingMessages.indexOf(prevMessage);
+          const nextIndex = (currentIndex + 1) % loadingMessages.length;
+          return loadingMessages[nextIndex];
+        });
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleBack = () => navigate("/");
 
@@ -117,19 +139,21 @@ const Upload = () => {
             />
           </div>
         )}
-
-        <button
-          className={uploaded ? "next-btn" : "upload-btn"}
-          onClick={uploaded ? handleNext : handleUpload}
-          disabled={loading}
-          type="button"
-        >
-          {loading
-            ? (<><FaSpinner className="spinner" /> Uploading...</>)
-            : uploaded
-            ? "Next"
-            : "Upload"}
-        </button>
+        {loading ? (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p className="loading-message">{loadingMessage}</p>
+          </div>
+        ) : (
+          <button
+            className={uploaded ? "next-btn" : "upload-btn"}
+            onClick={uploaded ? handleNext : handleUpload}
+            disabled={loading}
+            type="button"
+          >
+            {uploaded ? "Next" : "Upload"}
+          </button>
+        )}
 
         {error && <p className="error-msg">{error}</p>}
       </div>
