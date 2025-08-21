@@ -2,7 +2,7 @@
 .an-root {
   max-width: 100%; /* Use percentage for full width */
   margin: 0 auto;
-  padding: clamp(1rem, 4vw, 1.5rem); /* Use rem and clamp */
+  padding: clamp(0.8rem, 3.2vw, 1.2rem); /* Use rem and clamp */
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: #181411;
   background: #fff;
@@ -14,34 +14,34 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: clamp(0.5rem, 1.5vw, 1rem); /* Use rem and clamp */
+  margin-bottom: clamp(0.4rem, 1.2vw, 0.8rem); /* Use rem and clamp */
 }
 .an-top h2 {
-  font-weight: 700;
-  font-size: clamp(1.25rem, 4vw, 1.5rem); /* Use rem and clamp */
+  font-weight: 600;
+  font-size: clamp(1rem, 3.2vw, 1.2rem); /* Use rem and clamp */
 }
 .an-back {
   position: absolute;
   left: 0;
   background: transparent;
   border: 0;
-  padding: 0.5rem;
-  font-size: clamp(1.125rem, 3.5vw, 1.375rem); /* Use rem and clamp */
+  padding: 0.4rem;
+  font-size: clamp(1rem, 2.8vw, 1.1rem); /* Use rem and clamp */
   color: #1e1e1e;
   cursor: pointer;
 }
 
 .an-sub {
-  font-size: clamp(0.9375rem, 3vw, 1.125rem); /* Use rem and clamp */
+  font-size: clamp(0.75rem, 2.4vw, 0.9rem); /* Use rem and clamp */
   color: #333;
-  margin-bottom: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+  margin-bottom: clamp(0.6rem, 2.4vw, 0.9rem); /* Use rem and clamp */
 }
 
 /* Cards */
 .an-card {
   background: #f5f2f0;
-  border-radius: 0.625rem; /* Use rem */
-  padding: clamp(0.875rem, 3.5vw, 1.25rem); /* Use rem and clamp */
+  border-radius: 0.5rem; /* Use rem */
+  padding: clamp(0.7rem, 2.8vw, 1rem); /* Use rem and clamp */
   border: 1px solid #eee7e2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
@@ -49,13 +49,13 @@
 /* Textarea */
 .an-input textarea {
   width: 100%;
-  min-height: clamp(8.75rem, 25vh, 12.5rem); /* Use rem and clamp */
+  min-height: clamp(7rem, 20vh, 10rem); /* Use rem and clamp */
   resize: vertical;
   background: transparent;
   border: 0;
   outline: none;
-  font-size: clamp(0.9375rem, 3vw, 1.125rem); /* Use rem and clamp */
-  line-height: 1.5;
+  font-size: clamp(0.75rem, 2.4vw, 0.9rem); /* Use rem and clamp */
+  line-height: 1.4;
   color: #181411;
 }
 
@@ -66,20 +66,20 @@
   justify-content: space-between;
 }
 .an-actions {
-  margin: clamp(0.75rem, 3vw, 1.125rem) 0 clamp(0.5rem, 2vw, 0.75rem); /* Use rem and clamp */
+  margin: clamp(0.6rem, 2.4vw, 0.9rem) 0 clamp(0.4rem, 1.6vw, 0.6rem); /* Use rem and clamp */
 }
 
 .an-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem; /* Use rem */
-  padding: clamp(0.625rem, 2.5vw, 0.875rem) clamp(1.125rem, 4vw, 1.5rem); /* Use rem and clamp */
+  gap: 0.4rem; /* Use rem */
+  padding: clamp(0.5rem, 2vw, 0.7rem) clamp(0.9rem, 3.2vw, 1.2rem); /* Use rem and clamp */
   border: 0;
-  border-radius: 0.625rem; /* Use rem */
-  font-weight: 700;
+  border-radius: 0.5rem; /* Use rem */
+  font-weight: 600;
   cursor: pointer;
   transition: transform 0.06s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-  font-size: clamp(0.875rem, 2.8vw, 1rem); /* Use rem and clamp */
+  font-size: clamp(0.7rem, 2.2vw, 0.8rem); /* Use rem and clamp */
 }
 .an-btn:active {
   transform: translateY(1px);
@@ -96,7 +96,7 @@
 .an-btn-accent {
   background: #f47b25;
   color: #fff;
-  box-shadow: 0 4px 10px rgba(244, 123, 37, 0.25);
+  box-shadow: 0 3px 8px rgba(244, 123, 37, 0.25);
 }
 .an-btn-accent:hover {
   background: #e66d0f;
@@ -110,28 +110,28 @@
 
 .an-error {
   color: #d52a2a;
-  font-weight: 600;
-  margin: clamp(0.5rem, 2vw, 0.75rem) 0 clamp(0.125rem, 0.5vw, 0.25rem); /* Use rem and clamp */
+  font-weight: 500;
+  margin: clamp(0.4rem, 1.6vw, 0.6rem) 0 clamp(0.1rem, 0.4vw, 0.2rem); /* Use rem and clamp */
 }
 
 /* Listening chip */
 .an-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem; /* Use rem */
-  margin: clamp(0.5rem, 2vw, 0.75rem) 0 clamp(0.125rem, 0.5vw, 0.25rem); /* Use rem and clamp */
-  padding: clamp(0.375rem, 1.5vw, 0.625rem) clamp(0.625rem, 2.5vw, 0.875rem); /* Use rem and clamp */
+  gap: 0.4rem; /* Use rem */
+  margin: clamp(0.4rem, 1.6vw, 0.6rem) 0 clamp(0.1rem, 0.4vw, 0.2rem); /* Use rem and clamp */
+  padding: clamp(0.3rem, 1.2vw, 0.5rem) clamp(0.5rem, 2vw, 0.7rem); /* Use rem and clamp */
   background: #fff3ec;
   color: #a44d0e;
   border: 1px solid #ffd9bf;
   border-radius: 999px;
-  font-weight: 700;
-  font-size: clamp(0.8125rem, 2.5vw, 0.9375rem); /* Use rem and clamp */
+  font-weight: 600;
+  font-size: clamp(0.65rem, 2vw, 0.75rem); /* Use rem and clamp */
   width: fit-content;
 }
 .an-pulse {
-  width: clamp(0.5rem, 2vw, 0.625rem); /* Use rem and clamp */
-  height: clamp(0.5rem, 2vw, 0.625rem); /* Use rem and clamp */
+  width: clamp(0.4rem, 1.6vw, 0.5rem); /* Use rem and clamp */
+  height: clamp(0.4rem, 1.6vw, 0.5rem); /* Use rem and clamp */
   border-radius: 50%;
   background: #f47b25;
   animation: anPulse 1s infinite;
@@ -153,20 +153,20 @@
 
 /* Audio preview */
 .an-audio {
-  margin: clamp(0.5rem, 2vw, 0.75rem) 0 clamp(0.25rem, 1vw, 0.375rem); /* Use rem and clamp */
+  margin: clamp(0.4rem, 1.6vw, 0.6rem) 0 clamp(0.2rem, 0.8vw, 0.3rem); /* Use rem and clamp */
 }
 .an-audio audio {
   width: 100%;
-  margin-bottom: clamp(0.5rem, 2vw, 0.75rem); /* Use rem and clamp */
-  border-radius: 0.5rem; /* Use rem */
+  margin-bottom: clamp(0.4rem, 1.6vw, 0.6rem); /* Use rem and clamp */
+  border-radius: 0.4rem; /* Use rem */
   outline: none;
 }
 
 /* Sections */
 .an-section {
-  font-size: clamp(1rem, 3.5vw, 1.25rem); /* Use rem and clamp */
-  font-weight: 800;
-  margin: clamp(0.875rem, 3vw, 1.25rem) 0 clamp(0.625rem, 2.5vw, 1rem); /* Use rem and clamp */
+  font-size: clamp(0.8rem, 2.8vw, 1rem); /* Use rem and clamp */
+  font-weight: 700;
+  margin: clamp(0.7rem, 2.4vw, 1rem) 0 clamp(0.5rem, 2vw, 0.8rem); /* Use rem and clamp */
 }
 
 /* Score card */
@@ -176,37 +176,37 @@
   justify-content: space-between;
 }
 .an-score-label {
-  font-size: clamp(0.875rem, 3vw, 1rem); /* Use rem and clamp */
+  font-size: clamp(0.7rem, 2.4vw, 0.8rem); /* Use rem and clamp */
   color: #443f3a;
 }
 .an-score-value {
-  font-size: clamp(1.75rem, 6vw, 2.25rem); /* Use rem and clamp */
-  font-weight: 800;
+  font-size: clamp(1.4rem, 4.8vw, 1.8rem); /* Use rem and clamp */
+  font-weight: 700;
 }
 
 /* Suggestions */
 .an-suggestions {
   display: grid;
-  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+  gap: clamp(0.6rem, 2.4vw, 0.9rem); /* Use rem and clamp */
 }
 
 .an-suggestion {
   display: grid;
-  grid-template-columns: clamp(2.625rem, 10vw, 3.125rem) 1fr; /* Use rem and clamp */
-  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+  grid-template-columns: clamp(2.1rem, 8vw, 2.5rem) 1fr; /* Use rem and clamp */
+  gap: clamp(0.6rem, 2.4vw, 0.9rem); /* Use rem and clamp */
   align-items: start;
 }
 
 .an-grade {
-  width: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
-  height: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
+  width: clamp(2.1rem, 8vw, 2.5rem); /* Use rem and clamp */
+  height: clamp(2.1rem, 8vw, 2.5rem); /* Use rem and clamp */
   display: grid;
   place-items: center;
   background: #f1edea;
   border: 1px solid #e5ded8;
-  border-radius: 0.625rem; /* Use rem */
-  font-weight: 800;
-  font-size: clamp(1.125rem, 4vw, 1.375rem); /* Use rem and clamp */
+  border-radius: 0.5rem; /* Use rem */
+  font-weight: 700;
+  font-size: clamp(0.9rem, 3.2vw, 1.1rem); /* Use rem and clamp */
 }
 .an-grade--empty {
   background: #f7f4f2;
@@ -214,104 +214,147 @@
 }
 
 .an-suggestion-body {
-  line-height: 1.3;
+  line-height: 1.2;
 }
 .an-suggestion-title {
-  font-weight: 800;
-  margin-bottom: clamp(0.25rem, 1vw, 0.375rem); /* Use rem and clamp */
+  font-weight: 700;
+  margin-bottom: clamp(0.2rem, 0.8vw, 0.3rem); /* Use rem and clamp */
 }
 .an-suggestion-note {
   color: #4a4744;
-  font-size: clamp(0.875rem, 2.8vw, 1rem); /* Use rem and clamp */
+  font-size: clamp(0.7rem, 2.2vw, 0.8rem); /* Use rem and clamp */
 }
 
 /* Feedback */
 .an-feedback {
   display: grid;
-  grid-template-columns: clamp(2.625rem, 10vw, 3.125rem) 1fr; /* Use rem and clamp */
-  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+  grid-template-columns: clamp(2.1rem, 8vw, 2.5rem) 1fr; /* Use rem and clamp */
+  gap: clamp(0.6rem, 2.4vw, 0.9rem); /* Use rem and clamp */
 }
 .an-feedback-icon {
-  width: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
-  height: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
+  width: clamp(2.1rem, 8vw, 2.5rem); /* Use rem and clamp */
+  height: clamp(2.1rem, 8vw, 2.5rem); /* Use rem and clamp */
   display: grid;
   place-items: center;
   background: #f1edea;
   border: 1px solid #e5ded8;
-  border-radius: 0.75rem; /* Use rem */
-  font-size: clamp(1.125rem, 4vw, 1.375rem); /* Use rem and clamp */
+  border-radius: 0.6rem; /* Use rem */
+  font-size: clamp(0.9rem, 3.2vw, 1.1rem); /* Use rem and clamp */
 }
 .an-feedback-title {
-  font-weight: 800;
+  font-weight: 700;
 }
 .an-feedback-note {
   color: #4a4744;
-  margin-top: clamp(0.25rem, 1vw, 0.375rem); /* Use rem and clamp */
-  font-size: clamp(0.875rem, 2.8vw, 1rem); /* Use rem and clamp */
+  margin-top: clamp(0.2rem, 0.8vw, 0.3rem); /* Use rem and clamp */
+  font-size: clamp(0.7rem, 2.2vw, 0.8rem); /* Use rem and clamp */
 }
 
 /* Bottom nav */
 .an-bottom-row {
   display: flex;
   justify-content: center;
-  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
-  margin-top: clamp(1.125rem, 4vw, 1.5rem); /* Use rem and clamp */
+  gap: clamp(0.6rem, 2.4vw, 0.9rem); /* Use rem and clamp */
+  margin-top: clamp(0.9rem, 3.2vw, 1.2rem); /* Use rem and clamp */
 }
 
 /* Media Queries for different screen sizes */
 @media (min-width: 480px) {
   .an-root {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
 }
 
 @media (min-width: 768px) {
   .an-root {
     max-width: 720px;
-    padding: 2rem;
+    padding: 1.6rem;
   }
   .an-top h2 {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
   }
   .an-sub {
-    font-size: 1.125rem;
+    font-size: 0.9rem;
   }
   .an-input textarea {
-    min-height: 15.625rem; /* 250px */
+    min-height: 12.5rem; /* 200px */
   }
   .an-btn {
-    padding: 0.75rem 1.75rem;
-    font-size: 1rem;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.8rem;
   }
   .an-chip {
-    font-size: 0.875rem;
+    font-size: 0.7rem;
   }
   .an-section {
-    font-size: 1.375rem;
+    font-size: 1.1rem;
   }
   .an-score-label {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   .an-score-value {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
   .an-grade {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .an-suggestion-note {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   .an-feedback-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .an-feedback-note {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
 @media (min-width: 1024px) {
   .an-root {
     max-width: 960px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .an-root {
+    max-width: 1200px;
+  }
+  .an-top h2 {
+    font-size: 1.6rem;
+  }
+  .an-sub {
+    font-size: 1rem;
+  }
+  .an-input textarea {
+    min-height: 16rem;
+  }
+  .an-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.9rem;
+  }
+  .an-chip {
+    font-size: 0.8rem;
+  }
+  .an-section {
+    font-size: 1.2rem;
+  }
+  .an-score-label {
+    font-size: 0.9rem;
+  }
+  .an-score-value {
+    font-size: 2.8rem;
+  }
+  .an-grade {
+    font-size: 1.4rem;
+  }
+  .an-suggestion-note {
+    font-size: 0.9rem;
+  }
+  .an-feedback-icon {
+    font-size: 1.4rem;
+  }
+  .an-feedback-note {
+    font-size: 0.9rem;
   }
 }
 

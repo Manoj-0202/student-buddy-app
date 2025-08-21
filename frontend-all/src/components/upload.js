@@ -69,7 +69,7 @@ const Upload = () => {
       </header>
 
       <div className="upload-card">
-        <h3 className="card-heading">Upload Your Study Materials</h3>
+        <h3 className="card-heading">Upload Your Study Materials or Enter Text </h3>
         <p className="card-sub">
           Enhance your learning experience by uploading your study materials
           or entering text directly for analysis and insights.

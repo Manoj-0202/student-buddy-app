@@ -21,12 +21,12 @@
   --bg-primary: #f8f8f8;
   --accent-primary: #007bff;
 
-  --spacing-small: 0.5rem;
-  --spacing-medium: 1rem;
-  --spacing-large: 1.5rem;
+  --spacing-small: 0.4rem;
+  --spacing-medium: 0.8rem;
+  --spacing-large: 1.2rem;
 
-  --navbar-height-mobile: 4.0625rem; /* 65px */
-  --navbar-height-tablet: 4.375rem; /* 70px */
+  --navbar-height-mobile: 3.5rem; /* 56px */
+  --navbar-height-tablet: 4rem; /* 64px */
   --navbar-height: var(--navbar-height-mobile);
 }
 
@@ -37,10 +37,15 @@ html, body, #root {
 }
 
 body {
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-secondary);
   background-color: var(--bg-primary);
   font-family: var(--font-primary);
+  font-size: 14px;
+}
+
+#root {
+  min-height: 100%; /* Ensure root takes full body height */
 }
 
 /* Typography */
@@ -68,8 +73,8 @@ button {
   font-family: var(--font-secondary);
   cursor: pointer;
   border: none;
-  padding: 0.625rem 0.9375rem; /* 10px 15px */
-  border-radius: 0.3125rem; /* 5px */
+  padding: 0.5rem 0.75rem; /* 8px 12px */
+  border-radius: 0.25rem; /* 4px */
   transition: background-color 0.3s ease;
 }
 
@@ -88,10 +93,10 @@ input[type="email"],
 input[type="password"],
 textarea {
   width: 100%;
-  padding: 0.625rem; /* 10px */
-  margin-bottom: 0.9375rem; /* 15px */
+  padding: 0.5rem; /* 8px */
+  margin-bottom: 0.75rem; /* 12px */
   border: 1px solid #ccc;
-  border-radius: 0.3125rem; /* 5px */
+  border-radius: 0.25rem; /* 4px */
   font-family: var(--font-tertiary);
 }
 
@@ -133,6 +138,9 @@ textarea {
   :root {
     --navbar-height: var(--navbar-height-tablet);
   }
+  body {
+    font-size: 16px;
+  }
   .container {
     padding: var(--spacing-large);
   }
@@ -140,18 +148,18 @@ textarea {
 
 .error-message {
   color: red;
-  font-size: 0.9em;
-  margin-top: 0.3125rem; /* 5px */
+  font-size: 0.8em;
+  margin-top: 0.25rem; /* 4px */
 }
 
 .loading-spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
   border-radius: 50%;
-  width: 1.875rem; /* 30px */
-  height: 1.875rem; /* 30px */
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
   animation: spin 1s linear infinite;
-  margin: 1.25rem auto; /* 20px auto */
+  margin: 1rem auto; /* 16px auto */
 }
 
 @keyframes spin {
