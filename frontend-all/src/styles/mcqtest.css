@@ -1,4 +1,4 @@
-/* ====== Design tokens ====== */
+/* ====== Design tokens (unchanged colors) ====== */
 :root {
   --bg: #fff;
   --ink: #181411;
@@ -25,6 +25,7 @@
   --shadow-1: 0 1px 0 rgba(0,0,0,.02);
   --shadow-2: 0 6px 24px rgba(0,0,0,.06);
 
+  /* base type (we'll override per-breakpoint below) */
   --fs-h1: 20px;
   --fs-h2: 20px;
   --fs-body: 15px;
@@ -67,8 +68,10 @@
   color: #1f1f1f;
   cursor: pointer;
   border-radius: 10px;
+  transition: background .18s ease, transform .02s ease;
 }
 .icon-btn:hover { background: rgba(0,0,0,.04); }
+.icon-btn:active { transform: translateY(1px); }
 .icon-btn:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -84,7 +87,7 @@
 }
 .q-text {
   color: #403c38;
-  line-height: 1.55;
+  line-height: 1.6;           /* a touch more legible on small screens */
   margin: 0 2px 16px;
   font-size: var(--fs-body);
 }
@@ -109,8 +112,11 @@
   cursor: pointer;
   transition: box-shadow .18s ease, border-color .18s ease, transform .02s ease, background .18s ease;
   box-shadow: var(--shadow-1);
+  min-height: 52px;           /* consistent tap target */
 }
-.option:hover { box-shadow: var(--shadow-2); }
+@media (pointer: fine) {
+  .option:hover { box-shadow: var(--shadow-2); }
+}
 .option:active { transform: scale(.998); }
 .option.selected {
   border-color: #e7ddd6;
@@ -153,6 +159,8 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 18px;
+  gap: 10px;
+  padding-bottom: env(safe-area-inset-bottom); /* better on iOS */
 }
 
 .primary-btn,
@@ -243,7 +251,57 @@
   * { transition: none !important; animation: none !important; }
 }
 
-/* ====== Wider screens ====== */
-@media (min-width: 768px) {
-  .mcq-root { max-width: 560px; }
+/* ========== RESPONSIVE TWEAKS (no color changes) ========== */
+
+/* Small phones (≤ 360px) — tighten spacing & slightly smaller type */
+@media (max-width: 360px) {
+  :root {
+    --fs-h1: 18px;
+    --fs-h2: 18px;
+    --fs-body: 14px;
+  }
+  .mcq-root { padding: 14px 14px 24px; }
+  .option { padding: 12px; gap: 10px; }
+  .primary-btn, .ghost-btn { padding: 11px 16px; }
+}
+
+/* Typical phones (361–599px) — default sizes, a bit wider container */
+@media (min-width: 361px) and (max-width: 599px) {
+  .mcq-root { max-width: 480px; }
+}
+
+/* Large phones / small tablets (600–767px) — relax line lengths */
+@media (min-width: 600px) and (max-width: 767px) {
+  :root { --fs-body: 16px; }
+  .mcq-root { max-width: 560px; padding: 20px 20px 32px; }
+  .result-score { font-size: 36px; }
+}
+
+/* Tablets (768–1023px) — roomier layout + optional 2-col options */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root { --fs-h1: 22px; --fs-body: 16px; }
+  .mcq-root { max-width: 720px; padding: 22px 22px 36px; }
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
+
+/* Desktops (≥ 1024px) — comfortable reading width */
+@media (min-width: 1024px) {
+  :root { --fs-h1: 22px; --fs-body: 16px; }
+  .mcq-root { max-width: 880px; padding: 24px 24px 40px; }
+  .result-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .result-score { font-size: 38px; margin-bottom: 8px; }
+}
+
+/* Very wide (≥ 1280px) — stay readable, don’t stretch too far */
+@media (min-width: 1280px) {
+  .mcq-root { max-width: 980px; }
 }
