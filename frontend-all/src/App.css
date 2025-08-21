@@ -1,49 +1,6 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Global styles for Plus Jakarta Sans */
+/* Global styles for fonts */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
-/* Global styles for Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-/* Global styles for Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* Basic Reset */
@@ -51,6 +8,26 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Root variables */
+:root {
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+  --font-tertiary: 'Inter', sans-serif;
+
+  --text-primary: #222;
+  --text-secondary: #333;
+  --bg-primary: #f8f8f8;
+  --accent-primary: #007bff;
+
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.5rem;
+
+  --navbar-height-mobile: 4.0625rem; /* 65px */
+  --navbar-height-tablet: 4.375rem; /* 70px */
+  --navbar-height: var(--navbar-height-mobile);
 }
 
 /* Body and Root styles */
@@ -61,23 +38,24 @@ html, body, #root {
 
 body {
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f8f8;
+  color: var(--text-secondary);
+  background-color: var(--bg-primary);
+  font-family: var(--font-primary);
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  margin-bottom: 0.5em;
-  color: #222;
+  font-family: var(--font-primary);
+  margin-bottom: var(--spacing-small);
+  color: var(--text-primary);
 }
 
 p {
-  margin-bottom: 1em;
+  margin-bottom: var(--spacing-medium);
 }
 
 a {
-  color: #007bff;
+  color: var(--accent-primary);
   text-decoration: none;
 }
 
@@ -87,11 +65,11 @@ a:hover {
 
 /* Buttons */
 button {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-secondary);
   cursor: pointer;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 0.625rem 0.9375rem; /* 10px 15px */
+  border-radius: 0.3125rem; /* 5px */
   transition: background-color 0.3s ease;
 }
 
@@ -110,18 +88,18 @@ input[type="email"],
 input[type="password"],
 textarea {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 0.625rem; /* 10px */
+  margin-bottom: 0.9375rem; /* 15px */
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: 'Inter', sans-serif;
+  border-radius: 0.3125rem; /* 5px */
+  font-family: var(--font-tertiary);
 }
 
 /* Utility Classes */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--spacing-medium);
 }
 
 .text-center {
@@ -130,7 +108,7 @@ textarea {
 
 .flex-container {
   display: flex;
-  gap: 10px;
+  gap: var(--spacing-small);
 }
 
 .flex-center {
@@ -147,43 +125,33 @@ textarea {
 
 .main-content {
   flex: 1;
-  padding-bottom: var(--navbar-height); /* Adjust based on navbar height */
+  padding-bottom: var(--navbar-height);
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .container {
-    padding: 15px;
-  }
-}
-
-/* Add any other global styles here */
-:root {
-  --navbar-height-mobile: 65px;
-  --navbar-height-tablet: 70px;
-  --navbar-height: var(--navbar-height-mobile);
-}
-
 @media (min-width: 768px) {
   :root {
     --navbar-height: var(--navbar-height-tablet);
+  }
+  .container {
+    padding: var(--spacing-large);
   }
 }
 
 .error-message {
   color: red;
   font-size: 0.9em;
-  margin-top: 5px;
+  margin-top: 0.3125rem; /* 5px */
 }
 
 .loading-spinner {
   border: 4px solid #f3f3f3;
   border-top: 4px solid #3498db;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem; /* 30px */
+  height: 1.875rem; /* 30px */
   animation: spin 1s linear infinite;
-  margin: 20px auto;
+  margin: 1.25rem auto; /* 20px auto */
 }
 
 @keyframes spin {

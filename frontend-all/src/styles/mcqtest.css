@@ -1,4 +1,4 @@
-/* ====== Design tokens (unchanged colors) ====== */
+/* ====== Design tokens ====== */
 :root {
   --bg: #fff;
   --ink: #181411;
@@ -18,24 +18,23 @@
   --bad-bg: #fff5f5;
   --bad-line: #f1d4d4;
 
-  --radius-lg: 16px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
+  --radius-lg: 1rem; /* 16px */
+  --radius-md: 0.875rem; /* 14px */
+  --radius-sm: 0.625rem; /* 10px */
 
-  --shadow-1: 0 1px 0 rgba(0,0,0,.02);
-  --shadow-2: 0 6px 24px rgba(0,0,0,.06);
+  --shadow-1: 0 1px 0 rgba(0, 0, 0, 0.02);
+  --shadow-2: 0 6px 24px rgba(0, 0, 0, 0.06);
 
-  /* base type (we'll override per-breakpoint below) */
-  --fs-h1: 20px;
-  --fs-h2: 20px;
-  --fs-body: 15px;
+  /* Fluid typography */
+  --fs-h1: clamp(1.25rem, 4vw, 1.5rem);
+  --fs-body: clamp(0.9375rem, 3vw, 1rem);
 }
 
 /* ====== Layout ====== */
 .mcq-root {
-  max-width: 440px;
+  max-width: 100%; /* Use percentage for full width */
   margin: 0 auto;
-  padding: 16px 16px 28px;
+  padding: 1rem 1rem 1.75rem; /* Use rem */
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: var(--ink);
   background: var(--bg);
@@ -49,75 +48,83 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 6px;
+  padding-bottom: 0.375rem; /* 6px */
   background: linear-gradient(var(--bg) 80%, transparent);
 }
 .topbar h2 {
   font-size: var(--fs-h1);
   font-weight: 700;
-  margin: 8px 0 10px;
+  margin: 0.5rem 0 0.625rem; /* 8px 0 10px */
 }
 .icon-btn {
   position: absolute;
-  left: 8px;
-  top: 6px;
+  left: 0.5rem; /* 8px */
+  top: 0.375rem; /* 6px */
   background: none;
   border: 0;
-  padding: 8px;
-  font-size: 18px;
+  padding: 0.5rem; /* 8px */
+  font-size: 1.125rem; /* 18px */
   color: #1f1f1f;
   cursor: pointer;
-  border-radius: 10px;
-  transition: background .18s ease, transform .02s ease;
+  border-radius: 0.625rem; /* 10px */
+  transition: background 0.18s ease, transform 0.02s ease;
 }
-.icon-btn:hover { background: rgba(0,0,0,.04); }
-.icon-btn:active { transform: translateY(1px); }
+.icon-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+.icon-btn:active {
+  transform: translateY(1px);
+}
 .icon-btn:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 10px;
+  border-radius: 0.625rem; /* 10px */
 }
 
 /* ====== Question ====== */
 .q-progress {
-  font-size: 20px;
+  font-size: 1.25rem; /* 20px */
   font-weight: 800;
-  margin: 6px 2px 8px;
-  letter-spacing: .2px;
+  margin: 0.375rem 0.125rem 0.5rem; /* 6px 2px 8px */
+  letter-spacing: 0.2px;
 }
 .q-text {
   color: #403c38;
-  line-height: 1.6;           /* a touch more legible on small screens */
-  margin: 0 2px 16px;
+  line-height: 1.6;
+  margin: 0 0.125rem 1rem; /* 0 2px 16px */
   font-size: var(--fs-body);
 }
 
 /* ====== Options ====== */
 .options {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid; /* Use grid for options */
+  grid-template-columns: 1fr; /* Default to single column */
+  gap: 0.75rem; /* 12px */
 }
 
 .option {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem; /* 12px */
   width: 100%;
   text-align: left;
-  padding: 14px 14px;
+  padding: 0.875rem; /* 14px */
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
   background: var(--opt-bg);
   cursor: pointer;
-  transition: box-shadow .18s ease, border-color .18s ease, transform .02s ease, background .18s ease;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.02s ease, background 0.18s ease;
   box-shadow: var(--shadow-1);
-  min-height: 52px;           /* consistent tap target */
+  min-height: 3.25rem; /* 52px */
 }
 @media (pointer: fine) {
-  .option:hover { box-shadow: var(--shadow-2); }
+  .option:hover {
+    box-shadow: var(--shadow-2);
+  }
 }
-.option:active { transform: scale(.998); }
+.option:active {
+  transform: scale(0.998);
+}
 .option.selected {
   border-color: #e7ddd6;
   background: var(--opt-bg-selected);
@@ -129,19 +136,19 @@
 }
 
 .radio {
-  width: 22px;
-  height: 22px;
+  width: 1.375rem; /* 22px */
+  height: 1.375rem; /* 22px */
   border-radius: 50%;
   border: 2px solid var(--opt-ring);
   display: inline-grid;
   place-items: center;
   position: relative;
-  flex: 0 0 22px;
+  flex: 0 0 1.375rem; /* 22px */
 }
 .radio.on::after {
   content: "";
-  width: 10px;
-  height: 10px;
+  width: 0.625rem; /* 10px */
+  height: 0.625rem; /* 10px */
   border-radius: 50%;
   background: #000;
   box-shadow: inset 0 0 0 2px #000;
@@ -158,8 +165,8 @@
 .cta-row {
   display: flex;
   justify-content: flex-end;
-  margin-top: 18px;
-  gap: 10px;
+  margin-top: 1.125rem; /* 18px */
+  gap: 0.625rem; /* 10px */
   padding-bottom: env(safe-area-inset-bottom); /* better on iOS */
 }
 
@@ -167,21 +174,26 @@
 .ghost-btn {
   border: 0;
   border-radius: var(--radius-sm);
-  padding: 12px 18px;
+  padding: 0.75rem 1.125rem; /* 12px 18px */
   font-weight: 800;
   cursor: pointer;
-  transition: filter .18s ease, transform .02s ease, box-shadow .18s ease;
+  transition: filter 0.18s ease, transform 0.02s ease, box-shadow 0.18s ease;
 }
 
 .primary-btn {
   background: var(--accent);
   color: var(--accent-ink);
-  box-shadow: 0 6px 16px rgba(244,123,37,.25);
+  box-shadow: 0 6px 16px rgba(244, 123, 37, 0.25);
 }
-.primary-btn:hover { filter: brightness(0.98); box-shadow: 0 10px 22px rgba(244,123,37,.28); }
-.primary-btn:active { transform: translateY(1px); }
+.primary-btn:hover {
+  filter: brightness(0.98);
+  box-shadow: 0 10px 22px rgba(244, 123, 37, 0.28);
+}
+.primary-btn:active {
+  transform: translateY(1px);
+}
 .primary-btn:disabled {
-  opacity: .6;
+  opacity: 0.6;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -190,118 +202,122 @@
   background: #efe9e4;
   color: #1f1f1f;
 }
-.ghost-btn:hover { filter: brightness(0.98); }
-.ghost-btn:active { transform: translateY(1px); }
+.ghost-btn:hover {
+  filter: brightness(0.98);
+}
+.ghost-btn:active {
+  transform: translateY(1px);
+}
 
 /* ====== Results ====== */
 .result-card {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: 1rem; /* 16px */
   box-shadow: var(--shadow-2);
 }
 
 .result-title {
   color: var(--muted);
   font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 4px;
+  font-size: 0.875rem; /* 14px */
+  margin-bottom: 0.25rem; /* 4px */
 }
 .result-score {
-  font-size: 34px;
+  font-size: 2.125rem; /* 34px */
   font-weight: 800;
-  margin: 2px 0 10px;
+  margin: 0.125rem 0 0.625rem; /* 2px 0 10px */
 }
 
 .answers-review {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 0.625rem; /* 10px */
+  margin-top: 0.375rem; /* 6px */
 }
 .review-row {
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 0.75rem; /* 12px */
+  padding: 0.75rem; /* 12px */
   border: 1px solid var(--line);
 }
-.review-row.ok { background: var(--ok-bg); border-color: var(--ok-line); }
-.review-row.bad { background: var(--bad-bg); border-color: var(--bad-line); }
+.review-row.ok {
+  background: var(--ok-bg);
+  border-color: var(--ok-line);
+}
+.review-row.bad {
+  background: var(--bad-bg);
+  border-color: var(--bad-line);
+}
 .review-q {
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem; /* 4px */
 }
 .review-a {
   color: #5b5652;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
 }
 
 .result-ctas {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 0.625rem; /* 10px */
+  margin-top: 0.875rem; /* 14px */
 }
 
 /* ====== Helpers ====== */
-.subtle { color: var(--muted); }
-.error  { color: #c40000; margin: 8px 0; font-weight: 600; }
+.subtle {
+  color: var(--muted);
+}
+.error {
+  color: #c40000;
+  margin: 0.5rem 0; /* 8px 0 */
+  font-weight: 600;
+}
 
 /* ====== Motion preferences ====== */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
-}
-
-/* ========== RESPONSIVE TWEAKS (no color changes) ========== */
-
-/* Small phones (≤ 360px) — tighten spacing & slightly smaller type */
-@media (max-width: 360px) {
-  :root {
-    --fs-h1: 18px;
-    --fs-h2: 18px;
-    --fs-body: 14px;
+  * {
+    transition: none !important;
+    animation: none !important;
   }
-  .mcq-root { padding: 14px 14px 24px; }
-  .option { padding: 12px; gap: 10px; }
-  .primary-btn, .ghost-btn { padding: 11px 16px; }
 }
 
-/* Typical phones (361–599px) — default sizes, a bit wider container */
-@media (min-width: 361px) and (max-width: 599px) {
-  .mcq-root { max-width: 480px; }
-}
-
-/* Large phones / small tablets (600–767px) — relax line lengths */
-@media (min-width: 600px) and (max-width: 767px) {
-  :root { --fs-body: 16px; }
-  .mcq-root { max-width: 560px; padding: 20px 20px 32px; }
-  .result-score { font-size: 36px; }
-}
-
-/* Tablets (768–1023px) — roomier layout + optional 2-col options */
-@media (min-width: 768px) and (max-width: 1023px) {
-  :root { --fs-h1: 22px; --fs-body: 16px; }
-  .mcq-root { max-width: 720px; padding: 22px 22px 36px; }
+/* ========== RESPONSIVE TWEAKS ========== */
+@media (min-width: 600px) {
   .options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    grid-template-columns: 1fr 1fr; /* Two columns for tablets */
   }
 }
 
-/* Desktops (≥ 1024px) — comfortable reading width */
+@media (min-width: 768px) {
+  .mcq-root {
+    max-width: 720px;
+    padding: 1.25rem 1.25rem 2rem; /* 20px 20px 32px */
+  }
+  .result-score {
+    font-size: 2.25rem; /* 36px */
+  }
+}
+
 @media (min-width: 1024px) {
-  :root { --fs-h1: 22px; --fs-body: 16px; }
-  .mcq-root { max-width: 880px; padding: 24px 24px 40px; }
+  .mcq-root {
+    max-width: 880px;
+    padding: 1.5rem 1.5rem 2.5rem; /* 24px 24px 40px */
+  }
   .result-card {
     display: grid;
     grid-template-columns: 280px 1fr;
-    gap: 18px;
+    gap: 1.125rem; /* 18px */
     align-items: start;
   }
-  .result-score { font-size: 38px; margin-bottom: 8px; }
+  .result-score {
+    font-size: 2.375rem; /* 38px */
+    margin-bottom: 0.5rem; /* 8px */
+  }
 }
 
-/* Very wide (≥ 1280px) — stay readable, don’t stretch too far */
 @media (min-width: 1280px) {
-  .mcq-root { max-width: 980px; }
+  .mcq-root {
+    max-width: 980px;
+  }
 }

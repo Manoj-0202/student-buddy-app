@@ -1,8 +1,8 @@
 /* Base */
 .an-root {
-  max-width: 480px; /* Increased max-width for better desktop viewing */
+  max-width: 100%; /* Use percentage for full width */
   margin: 0 auto;
-  padding: clamp(16px, 4vw, 24px); /* Fluid padding */
+  padding: clamp(1rem, 4vw, 1.5rem); /* Use rem and clamp */
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: #181411;
   background: #fff;
@@ -14,150 +14,304 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: clamp(6px, 1.5vw, 10px); /* Fluid margin */
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem); /* Use rem and clamp */
 }
-.an-top h2 { font-weight: 700; font-size: clamp(20px, 4vw, 24px); } /* Fluid font size */
+.an-top h2 {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 4vw, 1.5rem); /* Use rem and clamp */
+}
 .an-back {
-  position: absolute; left: 0;
-  background: transparent; border: 0; padding: 6px 8px;
-  font-size: clamp(18px, 3.5vw, 22px); /* Fluid font size */
-  color: #1e1e1e; cursor: pointer;
+  position: absolute;
+  left: 0;
+  background: transparent;
+  border: 0;
+  padding: 0.5rem;
+  font-size: clamp(1.125rem, 3.5vw, 1.375rem); /* Use rem and clamp */
+  color: #1e1e1e;
+  cursor: pointer;
 }
 
-.an-sub { font-size: clamp(15px, 3vw, 18px); color: #333; margin-bottom: clamp(12px, 3vw, 18px); } /* Fluid font size and margin */
+.an-sub {
+  font-size: clamp(0.9375rem, 3vw, 1.125rem); /* Use rem and clamp */
+  color: #333;
+  margin-bottom: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+}
 
 /* Cards */
 .an-card {
   background: #f5f2f0;
-  border-radius: 10px;
-  padding: clamp(14px, 3.5vw, 20px); /* Fluid padding */
+  border-radius: 0.625rem; /* Use rem */
+  padding: clamp(0.875rem, 3.5vw, 1.25rem); /* Use rem and clamp */
   border: 1px solid #eee7e2;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 /* Textarea */
 .an-input textarea {
   width: 100%;
-  min-height: clamp(140px, 25vh, 200px); /* Fluid min-height */
-  resize: vertical; /* Changed from none to vertical for better user experience */
+  min-height: clamp(8.75rem, 25vh, 12.5rem); /* Use rem and clamp */
+  resize: vertical;
   background: transparent;
   border: 0;
   outline: none;
-  font-size: clamp(15px, 3vw, 18px); /* Fluid font size */
+  font-size: clamp(0.9375rem, 3vw, 1.125rem); /* Use rem and clamp */
   line-height: 1.5;
   color: #181411;
 }
 
 /* Buttons */
-.an-row { display: flex; align-items: center; justify-content: space-between; }
-.an-actions { margin: clamp(12px, 3vw, 18px) 0 clamp(8px, 2vw, 12px); } /* Fluid margin */
+.an-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.an-actions {
+  margin: clamp(0.75rem, 3vw, 1.125rem) 0 clamp(0.5rem, 2vw, 0.75rem); /* Use rem and clamp */
+}
 
 .an-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: clamp(10px, 2.5vw, 14px) clamp(18px, 4vw, 24px); /* Fluid padding */
-  border: 0; border-radius: 10px;
-  font-weight: 700; cursor: pointer;
-  transition: transform .06s ease, background-color .2s ease, box-shadow .2s ease;
-  font-size: clamp(14px, 2.8vw, 16px); /* Fluid font size */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* Use rem */
+  padding: clamp(0.625rem, 2.5vw, 0.875rem) clamp(1.125rem, 4vw, 1.5rem); /* Use rem and clamp */
+  border: 0;
+  border-radius: 0.625rem; /* Use rem */
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.06s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: clamp(0.875rem, 2.8vw, 1rem); /* Use rem and clamp */
 }
-.an-btn:active { transform: translateY(1px); }
+.an-btn:active {
+  transform: translateY(1px);
+}
 
-.an-btn-muted { background: #ebe7e4; color: #1f1a16; }
-.an-btn-muted:hover { background: #e2ddd9; }
+.an-btn-muted {
+  background: #ebe7e4;
+  color: #1f1a16;
+}
+.an-btn-muted:hover {
+  background: #e2ddd9;
+}
 
 .an-btn-accent {
-  background: #f47b25; color: #fff;
-  box-shadow: 0 4px 10px rgba(244,123,37,.25);
+  background: #f47b25;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(244, 123, 37, 0.25);
 }
-.an-btn-accent:hover { background: #e66d0f; }
+.an-btn-accent:hover {
+  background: #e66d0f;
+}
 
-.an-btn-soft { background: #fff3ec; color: #a44d0e; border: 1px solid #ffd9bf; }
+.an-btn-soft {
+  background: #fff3ec;
+  color: #a44d0e;
+  border: 1px solid #ffd9bf;
+}
 
-.an-error { color: #d52a2a; font-weight: 600; margin: clamp(8px, 2vw, 12px) 0 clamp(2px, 0.5vw, 4px); } /* Fluid margin */
+.an-error {
+  color: #d52a2a;
+  font-weight: 600;
+  margin: clamp(0.5rem, 2vw, 0.75rem) 0 clamp(0.125rem, 0.5vw, 0.25rem); /* Use rem and clamp */
+}
 
 /* Listening chip */
 .an-chip {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin: clamp(8px, 2vw, 12px) 0 clamp(2px, 0.5vw, 4px); /* Fluid margin */
-  padding: clamp(6px, 1.5vw, 10px) clamp(10px, 2.5vw, 14px); /* Fluid padding */
-  background: #fff3ec; color: #a44d0e; border: 1px solid #ffd9bf;
-  border-radius: 999px; font-weight: 700; font-size: clamp(13px, 2.5vw, 15px); width: fit-content; /* Fluid font size */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* Use rem */
+  margin: clamp(0.5rem, 2vw, 0.75rem) 0 clamp(0.125rem, 0.5vw, 0.25rem); /* Use rem and clamp */
+  padding: clamp(0.375rem, 1.5vw, 0.625rem) clamp(0.625rem, 2.5vw, 0.875rem); /* Use rem and clamp */
+  background: #fff3ec;
+  color: #a44d0e;
+  border: 1px solid #ffd9bf;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: clamp(0.8125rem, 2.5vw, 0.9375rem); /* Use rem and clamp */
+  width: fit-content;
 }
-.an-pulse { width: clamp(8px, 2vw, 10px); height: clamp(8px, 2vw, 10px); border-radius: 50%; background: #f47b25; animation: anPulse 1s infinite; } /* Fluid dimensions */
-@keyframes anPulse { 0%{transform:scale(.9);opacity:.6} 50%{transform:scale(1.2);opacity:1} 100%{transform:scale(.9);opacity:.6} }
+.an-pulse {
+  width: clamp(0.5rem, 2vw, 0.625rem); /* Use rem and clamp */
+  height: clamp(0.5rem, 2vw, 0.625rem); /* Use rem and clamp */
+  border-radius: 50%;
+  background: #f47b25;
+  animation: anPulse 1s infinite;
+}
+@keyframes anPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+}
 
 /* Audio preview */
-.an-audio { margin: clamp(8px, 2vw, 12px) 0 clamp(4px, 1vw, 6px); } /* Fluid margin */
-.an-audio audio { width: 100%; margin-bottom: clamp(8px, 2vw, 12px); border-radius: 8px; outline: none; } /* Fluid margin */
+.an-audio {
+  margin: clamp(0.5rem, 2vw, 0.75rem) 0 clamp(0.25rem, 1vw, 0.375rem); /* Use rem and clamp */
+}
+.an-audio audio {
+  width: 100%;
+  margin-bottom: clamp(0.5rem, 2vw, 0.75rem); /* Use rem and clamp */
+  border-radius: 0.5rem; /* Use rem */
+  outline: none;
+}
 
 /* Sections */
-.an-section { font-size: clamp(16px, 3.5vw, 20px); font-weight: 800; margin: clamp(14px, 3vw, 20px) 0 clamp(10px, 2.5vw, 16px); } /* Fluid font size and margin */
+.an-section {
+  font-size: clamp(1rem, 3.5vw, 1.25rem); /* Use rem and clamp */
+  font-weight: 800;
+  margin: clamp(0.875rem, 3vw, 1.25rem) 0 clamp(0.625rem, 2.5vw, 1rem); /* Use rem and clamp */
+}
 
 /* Score card */
-.an-score { display: flex; align-items: center; justify-content: space-between; }
-.an-score-label { font-size: clamp(14px, 3vw, 16px); color: #443f3a; } /* Fluid font size */
-.an-score-value { font-size: clamp(28px, 6vw, 36px); font-weight: 800; } /* Fluid font size */
+.an-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.an-score-label {
+  font-size: clamp(0.875rem, 3vw, 1rem); /* Use rem and clamp */
+  color: #443f3a;
+}
+.an-score-value {
+  font-size: clamp(1.75rem, 6vw, 2.25rem); /* Use rem and clamp */
+  font-weight: 800;
+}
 
 /* Suggestions */
-.an-suggestions { display: grid; gap: clamp(12px, 3vw, 18px); } /* Fluid gap */
+.an-suggestions {
+  display: grid;
+  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+}
 
 .an-suggestion {
   display: grid;
-  grid-template-columns: clamp(42px, 10vw, 50px) 1fr; /* Fluid column width */
-  gap: clamp(12px, 3vw, 18px); /* Fluid gap */
+  grid-template-columns: clamp(2.625rem, 10vw, 3.125rem) 1fr; /* Use rem and clamp */
+  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
   align-items: start;
 }
 
 .an-grade {
-  width: clamp(42px, 10vw, 50px); height: clamp(42px, 10vw, 50px); /* Fluid dimensions */
-  display: grid; place-items: center;
+  width: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
+  height: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
+  display: grid;
+  place-items: center;
   background: #f1edea;
   border: 1px solid #e5ded8;
-  border-radius: 10px;
-  font-weight: 800; font-size: clamp(18px, 4vw, 22px); /* Fluid font size */
+  border-radius: 0.625rem; /* Use rem */
+  font-weight: 800;
+  font-size: clamp(1.125rem, 4vw, 1.375rem); /* Use rem and clamp */
 }
-.an-grade--empty { background: #f7f4f2; color: transparent; }
+.an-grade--empty {
+  background: #f7f4f2;
+  color: transparent;
+}
 
-.an-suggestion-body { line-height: 1.3; }
-.an-suggestion-title { font-weight: 800; margin-bottom: clamp(4px, 1vw, 6px); } /* Fluid margin */
-.an-suggestion-note  { color: #4a4744; font-size: clamp(14px, 2.8vw, 16px); } /* Fluid font size */
+.an-suggestion-body {
+  line-height: 1.3;
+}
+.an-suggestion-title {
+  font-weight: 800;
+  margin-bottom: clamp(0.25rem, 1vw, 0.375rem); /* Use rem and clamp */
+}
+.an-suggestion-note {
+  color: #4a4744;
+  font-size: clamp(0.875rem, 2.8vw, 1rem); /* Use rem and clamp */
+}
 
 /* Feedback */
 .an-feedback {
   display: grid;
-  grid-template-columns: clamp(42px, 10vw, 50px) 1fr; /* Fluid column width */
-  gap: clamp(12px, 3vw, 18px); /* Fluid gap */
+  grid-template-columns: clamp(2.625rem, 10vw, 3.125rem) 1fr; /* Use rem and clamp */
+  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
 }
 .an-feedback-icon {
-  width: clamp(42px, 10vw, 50px); height: clamp(42px, 10vw, 50px); /* Fluid dimensions */
-  display: grid; place-items: center;
+  width: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
+  height: clamp(2.625rem, 10vw, 3.125rem); /* Use rem and clamp */
+  display: grid;
+  place-items: center;
   background: #f1edea;
   border: 1px solid #e5ded8;
-  border-radius: 12px;
-  font-size: clamp(18px, 4vw, 22px); /* Fluid font size */
+  border-radius: 0.75rem; /* Use rem */
+  font-size: clamp(1.125rem, 4vw, 1.375rem); /* Use rem and clamp */
 }
-.an-feedback-title { font-weight: 800; }
-.an-feedback-note  { color: #4a4744; margin-top: clamp(4px, 1vw, 6px); font-size: clamp(14px, 2.8vw, 16px); } /* Fluid font size and margin */
+.an-feedback-title {
+  font-weight: 800;
+}
+.an-feedback-note {
+  color: #4a4744;
+  margin-top: clamp(0.25rem, 1vw, 0.375rem); /* Use rem and clamp */
+  font-size: clamp(0.875rem, 2.8vw, 1rem); /* Use rem and clamp */
+}
 
 /* Bottom nav */
-.an-bottom-row { display: flex; justify-content: center; gap: clamp(12px, 3vw, 18px); margin-top: clamp(18px, 4vw, 24px); } /* Fluid gap and margin */
+.an-bottom-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.75rem, 3vw, 1.125rem); /* Use rem and clamp */
+  margin-top: clamp(1.125rem, 4vw, 1.5rem); /* Use rem and clamp */
+}
 
-/* Media Queries for larger screens */
+/* Media Queries for different screen sizes */
+@media (min-width: 480px) {
+  .an-root {
+    padding: 1.5rem;
+  }
+}
+
 @media (min-width: 768px) {
   .an-root {
     max-width: 720px;
-    padding: 30px;
+    padding: 2rem;
   }
-  .an-top h2 { font-size: 28px; }
-  .an-sub { font-size: 18px; }
-  .an-input textarea { min-height: 250px; }
-  .an-btn { padding: 12px 28px; font-size: 16px; }
-  .an-chip { font-size: 14px; }
-  .an-section { font-size: 22px; }
-  .an-score-label { font-size: 16px; }
-  .an-score-value { font-size: 48px; }
-  .an-grade { font-size: 24px; }
-  .an-suggestion-note { font-size: 16px; }
-  .an-feedback-icon { font-size: 24px; }
-  .an-feedback-note { font-size: 16px; }
+  .an-top h2 {
+    font-size: 1.75rem;
+  }
+  .an-sub {
+    font-size: 1.125rem;
+  }
+  .an-input textarea {
+    min-height: 15.625rem; /* 250px */
+  }
+  .an-btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+  }
+  .an-chip {
+    font-size: 0.875rem;
+  }
+  .an-section {
+    font-size: 1.375rem;
+  }
+  .an-score-label {
+    font-size: 1rem;
+  }
+  .an-score-value {
+    font-size: 3rem;
+  }
+  .an-grade {
+    font-size: 1.5rem;
+  }
+  .an-suggestion-note {
+    font-size: 1rem;
+  }
+  .an-feedback-icon {
+    font-size: 1.5rem;
+  }
+  .an-feedback-note {
+    font-size: 1rem;
+  }
 }
+
+@media (min-width: 1024px) {
+  .an-root {
+    max-width: 960px;
+  }
+}
+
