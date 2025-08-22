@@ -1,45 +1,82 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useReducer, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generateQuizMcqs } from "../services/api";
 import "../styles/mcqtest.css";
 import { FaArrowLeft } from "react-icons/fa";
+
+const initialState = {
+  mcqs: [],
+  loading: false,
+  error: null,
+  userAnswers: {},
+  currentIdx: 0,
+  submitted: false,
+  score: 0,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_MCQS":
+      return { ...state, mcqs: action.payload };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
+    case "SET_ERROR":
+      return { ...state, error: action.payload };
+    case "SET_USER_ANSWERS":
+      return { ...state, userAnswers: action.payload };
+    case "SET_CURRENT_INDEX":
+      return { ...state, currentIdx: action.payload };
+    case "SET_SUBMITTED":
+      return { ...state, submitted: action.payload };
+    case "SET_SCORE":
+      return { ...state, score: action.payload };
+    case "RESTART":
+      return {
+        ...state,
+        userAnswers: {},
+        currentIdx: 0,
+        submitted: false,
+        score: 0,
+      };
+    default:
+      throw new Error();
+  }
+}
 
 const McqTest = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const sourceText = location.state?.sourceText || "";
 
-  const [mcqs, setMcqs] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    mcqs,
+    loading,
+    error,
+    userAnswers,
+    currentIdx,
+    submitted,
+    score,
+  } = state;
 
-  const [userAnswers, setUserAnswers] = useState({});
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
-  const [score, setScore] = useState(0);
-
-  // fetch questions
   useEffect(() => {
     const autoStart = async () => {
       if (!sourceText) {
-        setError("Source text not available to generate quiz.");
+        dispatch({ type: "SET_ERROR", payload: "Source text not available to generate quiz." });
         return;
       }
-      setLoading(true);
-      setError(null);
+      dispatch({ type: "SET_LOADING", payload: true });
+      dispatch({ type: "SET_ERROR", payload: null });
       try {
         const res = await generateQuizMcqs(sourceText, 5);
         const data = Array.isArray(res?.data) ? res.data : [];
-        setMcqs(data);
-        setCurrentIdx(0);
-        setUserAnswers({});
-        setSubmitted(false);
-        setScore(0);
+        dispatch({ type: "SET_MCQS", payload: data });
+        dispatch({ type: "RESTART" });
       } catch (err) {
         console.error("Generate MCQs error:", err);
-        setError("Failed to generate quiz MCQs. Please try again.");
+        dispatch({ type: "SET_ERROR", payload: "Failed to generate quiz MCQs. Please try again." });
       } finally {
-        setLoading(false);
+        dispatch({ type: "SET_LOADING", payload: false });
       }
     };
     autoStart();
@@ -53,43 +90,36 @@ const McqTest = () => {
   }, [currentIdx, mcqs.length]);
 
   const handleOptionSelect = (questionNumber, selectedLetter) => {
-    setUserAnswers((prev) => ({ ...prev, [questionNumber]: selectedLetter }));
+    dispatch({ type: "SET_USER_ANSWERS", payload: { ...userAnswers, [questionNumber]: selectedLetter } });
   };
 
   const goNext = () => {
     if (currentIdx < mcqs.length - 1) {
-      setCurrentIdx((i) => i + 1);
+      dispatch({ type: "SET_CURRENT_INDEX", payload: currentIdx + 1 });
       return;
     }
-    // submit
     let correct = 0;
     mcqs.forEach((item) => {
       if (userAnswers[item.question_number] === item.answer) correct += 1;
     });
-    setScore(correct);
-    setSubmitted(true);
+    dispatch({ type: "SET_SCORE", payload: correct });
+    dispatch({ type: "SET_SUBMITTED", payload: true });
   };
 
   const restart = () => {
-    setUserAnswers({});
-    setCurrentIdx(0);
-    setSubmitted(false);
-    setScore(0);
+    dispatch({ type: "RESTART" });
   };
 
   return (
     <div className="mcq-root">
-      {/* Top bar */}
       <div className="topbar">
         <button className="icon-btn" onClick={() => navigate(-1)} aria-label="Back">
           <FaArrowLeft />
         </button>
         <h2>Final Test</h2>
-        {/* spacer to keep title centered */}
         <span />
       </div>
 
-      {/* Loading overlay */}
       {loading && (
         <div className="loading-overlay">
           <div className="loading-box">
@@ -103,7 +133,6 @@ const McqTest = () => {
         </div>
       )}
 
-      {/* Body */}
       <div className="stage">
         <div className="card" role="region" aria-live="polite">
           {error && <p className="error">{error}</p>}
@@ -125,7 +154,7 @@ const McqTest = () => {
 
               <div className="options">
                 {q.options.map((option, i) => {
-                  const letter = String.fromCharCode(65 + i); // A, B, C...
+                  const letter = String.fromCharCode(65 + i);
                   const selected = userAnswers[q.question_number] === letter;
                   return (
                     <button

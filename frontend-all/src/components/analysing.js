@@ -1,30 +1,64 @@
-import React, { useState, useRef, useMemo } from "react";
+
+import React, { useReducer, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { transcribeAudio, analyzeText } from "../services/api";
 import { FaArrowLeft } from "react-icons/fa";
 import { FiMic, FiMicOff } from "react-icons/fi";
 import "../styles/analysing.css";
 
+const initialState = {
+  studentText: "",
+  isRecording: false,
+  audioBlob: null,
+  loading: false,
+  error: null,
+  analysisResult: null,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SET_STUDENT_TEXT":
+      return { ...state, studentText: action.payload };
+    case "SET_IS_RECORDING":
+      return { ...state, isRecording: action.payload };
+    case "SET_AUDIO_BLOB":
+      return { ...state, audioBlob: action.payload };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
+    case "SET_ERROR":
+      return { ...state, error: action.payload };
+    case "SET_ANALYSIS_RESULT":
+      return { ...state, analysisResult: action.payload };
+    case "RESET_ANALYSIS":
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        analysisResult: null,
+      };
+    default:
+      throw new Error();
+  }
+}
+
 const Analyze = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const sourceText = state?.sourceText || "";
+  const { state: routeState } = useLocation();
+  const sourceText = routeState?.sourceText || "";
 
-  // single source of truth (typed or spoken)
-  const [studentText, setStudentText] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    studentText,
+    isRecording,
+    audioBlob,
+    loading,
+    error,
+    analysisResult,
+  } = state;
 
-  // audio
-  const [isRecording, setIsRecording] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
 
-  // ui/data
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [analysisResult, setAnalysisResult] = useState(null);
-
-  // ---- audio recording ----
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -37,75 +71,70 @@ const Analyze = () => {
 
       mediaRecorderRef.current.onstop = () => {
         const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
-        setAudioBlob(blob);
+        dispatch({ type: "SET_AUDIO_BLOB", payload: blob });
         stream.getTracks().forEach((t) => t.stop());
       };
 
       mediaRecorderRef.current.start();
-      setIsRecording(true);
-      setError(null);
-      setAnalysisResult(null);
+      dispatch({ type: "SET_IS_RECORDING", payload: true });
+      dispatch({ type: "RESET_ANALYSIS" });
     } catch (err) {
       console.error(err);
-      setError("Microphone permission blocked or unavailable.");
+      dispatch({ type: "SET_ERROR", payload: "Microphone permission blocked or unavailable." });
     }
   };
 
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
       mediaRecorderRef.current.stop();
-      setIsRecording(false);
+      dispatch({ type: "SET_IS_RECORDING", payload: false });
     }
   };
 
   const transcribeAndAnalyze = async () => {
     if (!audioBlob) {
-      setError("No audio recorded.");
+      dispatch({ type: "SET_ERROR", payload: "No audio recorded." });
       return;
     }
-    setLoading(true);
-    setError(null);
-    setAnalysisResult(null);
+    dispatch({ type: "SET_LOADING", payload: true });
+    dispatch({ type: "RESET_ANALYSIS" });
 
     try {
       const fd = new FormData();
       fd.append("audio_file", audioBlob, "recording.webm");
       const tr = await transcribeAudio(fd);
       const transcribed = tr?.data?.transcript || "";
-      setStudentText(transcribed);
+      dispatch({ type: "SET_STUDENT_TEXT", payload: transcribed });
       await handleAnalyze(transcribed);
     } catch (err) {
       console.error(err);
-      setError("Transcription failed.");
+      dispatch({ type: "SET_ERROR", payload: "Transcription failed." });
     } finally {
-      setLoading(false);
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
-  // ---- analyze ----
   const handleAnalyze = async (textArg) => {
     const text = (textArg ?? studentText ?? "").trim();
-    if (!sourceText) return setError("Source text not available.");
-    if (!text) return setError("Please speak or type your answer first.");
+    if (!sourceText) return dispatch({ type: "SET_ERROR", payload: "Source text not available." });
+    if (!text) return dispatch({ type: "SET_ERROR", payload: "Please speak or type your answer first." });
 
-    setLoading(true);
-    setError(null);
-    setAnalysisResult(null);
+    dispatch({ type: "SET_LOADING", payload: true });
+    dispatch({ type: "RESET_ANALYSIS" });
 
     try {
       const res = await analyzeText(sourceText, text);
 
       console.log("Analyze response:", res.data);
-      setAnalysisResult(res.data || {});
+      dispatch({ type: "SET_ANALYSIS_RESULT", payload: res.data || {} });
     } catch (err) {
       console.error(err);
-      setError("Analysis failed.");
+      dispatch({ type: "SET_ERROR", payload: "Analysis failed." });
     } finally {
-      setLoading(false);
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
-  // helper: normalize score display without inventing values
   const renderScore = (score) => {
     if (score === null || score === undefined || score === "") return "—";
     if (typeof score === "number") {
@@ -115,7 +144,6 @@ const Analyze = () => {
     return String(score);
   };
 
-  // generic renderer so ALL API data is visible without hardcoding keys
   const renderValue = (val, depth = 0) => {
     if (val === null || val === undefined) return <span className="an-kv-null">null</span>;
     if (typeof val === "string" || typeof val === "number" || typeof val === "boolean") {
@@ -148,7 +176,6 @@ const Analyze = () => {
     return <span className="an-kv-primitive">{String(val)}</span>;
   };
 
-  // memoize plain list of top-level keys (for quick visibility)
   const topLevelKeys = useMemo(
     () => (analysisResult ? Object.keys(analysisResult) : []),
     [analysisResult]
@@ -156,7 +183,6 @@ const Analyze = () => {
 
   return (
     <div className="an-root">
-      {/* top bar */}
       <div className="an-top">
         <button className="an-back" onClick={() => navigate(-1)} aria-label="Back">
           <FaArrowLeft />
@@ -169,7 +195,7 @@ const Analyze = () => {
       <div className="an-card an-input">
         <textarea
           value={studentText}
-          onChange={(e) => setStudentText(e.target.value)}
+          onChange={(e) => dispatch({ type: "SET_STUDENT_TEXT", payload: e.target.value })}
           placeholder="Speak or type your understanding here…"
         />
       </div>
@@ -211,10 +237,8 @@ const Analyze = () => {
 
       {error && <p className="an-error">{error}</p>}
 
-      {/* ===== RESULTS ===== */}
       <h3 className="an-section">Analysis Results</h3>
 
-      {/* Score card */}
       {analysisResult?.score !== undefined && (
         <div className="an-card an-score">
           <div className="an-score-label">Match Score</div>
@@ -222,7 +246,6 @@ const Analyze = () => {
         </div>
       )}
 
-      {/* Suggestions (only if backend returns analysisResult.suggestions) */}
       {Array.isArray(analysisResult?.suggestions) &&
         analysisResult.suggestions.length > 0 && (
           <>
@@ -241,7 +264,6 @@ const Analyze = () => {
           </>
         )}
 
-      {/* Covered Points */}
       {Array.isArray(analysisResult?.covered_points) &&
         analysisResult.covered_points.length > 0 && (
           <>
@@ -268,7 +290,6 @@ const Analyze = () => {
           </>
         )}
 
-      {/* Missed Topics */}
       {Array.isArray(analysisResult?.missed_topics) &&
         analysisResult.missed_topics.length > 0 && (
           <>
@@ -283,7 +304,6 @@ const Analyze = () => {
           </>
         )}
 
-      {/* Feedback */}
       {analysisResult?.feedback && (analysisResult.feedback.title || analysisResult.feedback.note) && (
         <>
           <h3 className="an-section">Feedback</h3>
@@ -301,8 +321,6 @@ const Analyze = () => {
         </>
       )}
 
-      
-
       <div className="an-bottom-row">
         <button className="an-btn an-btn-soft" onClick={() => navigate("/preqna")}>
           Previous
@@ -319,3 +337,4 @@ const Analyze = () => {
 };
 
 export default Analyze;
+
