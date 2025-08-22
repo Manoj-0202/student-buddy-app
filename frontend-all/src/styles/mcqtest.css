@@ -142,8 +142,9 @@
 .q-text {
   color: #3f3a36;
   line-height: 1.55;
-  margin: 0.5rem 0 0; /* Removed bottom margin */
+  margin: 0.5rem 0 1; /* Removed bottom margin */
   font-size: var(--fs-body);
+  font-weight: 600 ;
 }
 
 /* Options */
