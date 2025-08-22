@@ -328,3 +328,28 @@ body {
     font-size: 0.9rem;
   }
 }
+
+@media (min-width: 1400px) {
+  .upload-container {
+    max-width: 1400px; /* Further increase max-width for very large screens */
+  }
+  .upload-card {
+    padding: var(--space-4) calc(var(--space-4) * 1.5); /* More horizontal padding */
+  }
+  .card-heading {
+    font-size: 1.4rem; /* Larger heading */
+  }
+  .card-sub {
+    font-size: 0.9rem; /* Larger sub-text */
+  }
+  .upload-tabs button {
+    font-size: 0.9rem; /* Larger tab buttons */
+  }
+  .upload-box p,
+  .upload-box span,
+  .text-section textarea,
+  .upload-btn,
+  .next-btn {
+    font-size: 1rem; /* Larger text elements */
+  }
+}

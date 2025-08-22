@@ -29,8 +29,9 @@ const Home = () => {
           <div className="welcome-text">
             <h4 className="subhead">AI–Powered Learning</h4>
             <p className="muted">
-              Get insights and track your academic growth. Unlock your full
-              potential with personalized learning.
+              Discover smarter ways to learn and grow with AI. Get real-time insights,
+               personalized guidance, and progress tracking—designed for anyone 
+               who wants to unlock their full potential.
             </p>
           </div>
           <button className="start-btn" onClick={handleStartLearning}>
@@ -40,28 +41,33 @@ const Home = () => {
       </section>
 
       <section>
-        <h3 className="section-title">Quick Actions</h3>
+        <h3 className="section-title"> Work Flow</h3>
         <div className="quick-actions">
-          <ActionCard
-            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_l8ygn0.jpg"
-            title="Pre-Test"
-          />
+  <ActionCard
+    image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_l8ygn0.jpg"
+    title="Pre-Test"
+    description="Assess your current knowledge and identify strengths and gaps before you begin."
+  />
 
-          <ActionCard
-            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_1_sehooy.jpg"
-            title="AI Understanding"
-          />
+  <ActionCard
+    image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_1_sehooy.jpg"
+    title="AI Understanding"
+    description="Get personalized insights and explanations powered by AI to simplify complex topics."
+  />
 
-          <ActionCard
-            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_2_jv7zid.jpg"
-            title="Final Test"
-          />
+  <ActionCard
+    image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_2_jv7zid.jpg"
+    title="Final Test"
+    description="Measure your progress, validate improvements, and see how much you’ve learned."
+  />
 
-          <ActionCard
-            image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_3_az9hct.jpg"
-            title="Practice"
-          />
-        </div>
+  <ActionCard
+    image="https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_5_Frame_0_3_az9hct.jpg"
+    title="Practice"
+    description="Reinforce your knowledge with exercises and hands-on practice for better retention."
+  />
+</div>
+
       </section>
 
       <section>

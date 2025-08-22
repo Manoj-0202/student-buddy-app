@@ -135,6 +135,11 @@ textarea {
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
+  .app-container {
+    margin-left: 15rem; /* Adjust for the new sidebar width */
+    overflow-x: hidden; /* Prevent horizontal overflow from covering navbar */
+  }
+
   :root {
     --navbar-height: var(--navbar-height-tablet);
   }
@@ -143,6 +148,7 @@ textarea {
   }
   .container {
     padding: var(--spacing-large);
+    max-width: 1400px; /* Increased max-width for larger screens */
   }
 }
 

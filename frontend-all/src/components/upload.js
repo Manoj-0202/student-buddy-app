@@ -35,7 +35,7 @@ const Upload = () => {
       }, 2000);
     }
     return () => clearInterval(interval);
-  }, [loading]);
+  }, [loading, loadingMessages]);
 
   const handleBack = () => navigate("/");
 
@@ -151,7 +151,7 @@ const Upload = () => {
             disabled={loading}
             type="button"
           >
-            {uploaded ? "Next" : "Upload"}
+            {uploaded ? "Go To Pre-Test" : "Upload"}
           </button>
         )}
 

@@ -9,17 +9,36 @@ const Navbar = () => {
 
   const [isVisible, setIsVisible] = useState(true);
   const lastYRef = useRef(typeof window !== "undefined" ? window.scrollY : 0);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   const isHome = location.pathname === "/";
   const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const handleMediaQueryChange = (e) => {
+      setIsLargeScreen(e.matches);
+      // If it becomes a large screen, ensure navbar is visible
+      if (e.matches) {
+        setIsVisible(true);
+      }
+    };
+
+    // Initial check
+    setIsLargeScreen(mediaQuery.matches);
+    // Add listener for changes
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+
     // On route change: fixed & visible on home, hidden by default elsewhere
     lastYRef.current = window.scrollY;
-    setIsVisible(isHome ? true : false);
+    // Only set visibility based on home if not large screen
+    if (!mediaQuery.matches) {
+      setIsVisible(isHome ? true : false);
+    }
 
     const onScroll = () => {
-      if (isHome) return; // fixed & visible on home
+      // If it's a large screen, or on home page, do not hide/show based on scroll
+      if (isLargeScreen || isHome) return;
 
       const y = window.scrollY;
       const prev = lastYRef.current;
@@ -37,8 +56,12 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+    };
+  }, [isHome, isLargeScreen]);
 
   return (
     <div
@@ -48,6 +71,9 @@ const Navbar = () => {
         isVisible ? "visible" : "hidden",
       ].join(" ").trim()}
     >
+      <div className="navbar-logo" onClick={() => navigate("/")}>
+        StudyBuddy
+      </div>
       <div
         className={`nav-item ${isActive("/") ? "active" : ""}`}
         onClick={() => navigate("/")}

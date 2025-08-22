@@ -10,7 +10,6 @@ import McqTest from "./components/mcqtest";
 
 const AppContent = () => {
   const location = useLocation();
-  const showNavbar = location.pathname !== '/analysing';
 
   return (
     <div className="app-container">
@@ -21,7 +20,7 @@ const AppContent = () => {
         <Route path="/analysing" element={<Analyze />} /> 
         <Route path="/mcqtest" element={<McqTest />} />
       </Routes>
-      {showNavbar && <Navbar />}
+      <Navbar />
     </div>
   );
 };
