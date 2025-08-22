@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000'; // TODO: Move to environment variable
+const API_BASE_URL = 'http://api.local/'; // TODO: Move to environment variable
 
 const api = axios.create({
   baseURL: API_BASE_URL,
