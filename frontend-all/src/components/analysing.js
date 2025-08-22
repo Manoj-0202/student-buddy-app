@@ -100,10 +100,11 @@ const Analyze = () => {
     dispatch({ type: "RESET_ANALYSIS" });
 
     try {
-      const fd = new FormData();
-      fd.append("audio_file", audioBlob, "recording.webm");
-      const tr = await transcribeAudio(fd);
+      console.log("Audio blob:", audioBlob);
+      const tr = await transcribeAudio(audioBlob);
+      console.log("Transcription response:", tr);
       const transcribed = tr?.data?.transcript || "";
+      console.log("Transcribed text:", transcribed);
       dispatch({ type: "SET_STUDENT_TEXT", payload: transcribed });
       await handleAnalyze(transcribed);
     } catch (err) {
@@ -125,7 +126,7 @@ const Analyze = () => {
     try {
       const res = await analyzeText(sourceText, text);
 
-      console.log("Analyze response:", res.data);
+      console.log("Analyze response:", res);
       dispatch({ type: "SET_ANALYSIS_RESULT", payload: res.data || {} });
     } catch (err) {
       console.error(err);
@@ -183,6 +184,14 @@ const Analyze = () => {
 
   return (
     <div className="an-root">
+      {loading && (
+        <div className="an-overlay">
+          <div className="an-overlay-content">
+            <span className="an-spinner" />
+            <p>Processing...</p>
+          </div>
+        </div>
+      )}
       <div className="an-top">
         <button className="an-back" onClick={() => navigate(-1)} aria-label="Back">
           <FaArrowLeft />
@@ -215,7 +224,14 @@ const Analyze = () => {
           onClick={() => handleAnalyze()}
           disabled={loading || !studentText.trim()}
         >
-          {loading ? "Analyzing…" : "Analyze"}
+          {loading ? (
+            <span className="an-spinner-container">
+              <span className="an-spinner" />
+              <span>Analyzing...</span>
+            </span>
+          ) : (
+            "Analyze"
+          )}
         </button>
       </div>
 
@@ -230,7 +246,14 @@ const Analyze = () => {
         <div className="an-audio">
           <audio src={URL.createObjectURL(audioBlob)} controls />
           <button className="an-btn an-btn-soft" onClick={transcribeAndAnalyze} disabled={loading}>
-            {loading ? "Working…" : "Transcribe & Analyze Audio"}
+            {loading ? (
+              <span className="an-spinner-container">
+                <span className="an-spinner" />
+                <span>Working...</span>
+              </span>
+            ) : (
+              "Transcribe & Analyze Audio"
+            )}
           </button>
         </div>
       )}
