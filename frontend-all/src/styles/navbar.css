@@ -98,6 +98,7 @@
     border-right: 1px solid #eee; /* Add right border */
     box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.05); /* Shadow to the right */
     padding-top: 0; /* Remove padding-top from navbar, logo has its own */
+    background-color: #f8f8f8; /* Added background color */
   }
 
   .navbar-logo {

@@ -92,9 +92,6 @@ const McqTest = () => {
       {/* Loading overlay */}
       {loading && (
         <div className="loading-overlay">
-          <button className="icon-btn back-from-loading" onClick={() => navigate(-1)} aria-label="Back">
-            <FaArrowLeft />
-          </button>
           <div className="loading-box">
             <div className="spinner" />
             <p className="subtle">
