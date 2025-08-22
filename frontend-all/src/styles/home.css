@@ -9,6 +9,8 @@
   --radius-lg: 0.8rem; /* 12.8px */
   --radius-md: 0.6rem; /* 9.6px */
 
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08); /* New, more prominent shadow */
+
   /* Fluid typography and spacing */
   --fs-brand: clamp(1rem, 1.5vw, 1.125rem);
   --fs-h1: clamp(1.125rem, 2.8vw, 1.5rem);
@@ -90,7 +92,7 @@ body {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: 0.6rem; /* 9.6px */
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-card);
 }
 .welcome-img {
   width: 100%;
@@ -125,6 +127,7 @@ body {
 }
 .start-btn:hover {
   background: var(--accent-hover);
+  box-shadow: 0 6px 16px rgba(255, 122, 0, 0.25); /* More pronounced shadow on hover */
 }
 .start-btn:active {
   transform: translateY(1px);
@@ -150,8 +153,12 @@ body {
   padding: var(--gap-1);
   text-align: center;
   cursor: pointer;
-  transition: transform 0.06s ease;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* Adjusted transition */
+  box-shadow: var(--shadow-card);
+}
+.action-card:hover {
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
 }
 .action-card:active {
   transform: translateY(1px);
@@ -179,7 +186,12 @@ body {
   background: var(--card);
   border-radius: var(--radius-lg);
   padding: var(--gap-1);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* Added transition */
+}
+.feature-card:hover {
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
 }
 .feature-card img {
   width: 100%;
@@ -212,6 +224,24 @@ body {
   }
   .features {
     padding-bottom: 0;
+  }
+
+  .welcome-card {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2);
+    padding: var(--gap-2); /* Adjust padding for horizontal layout */
+  }
+  .welcome-img {
+    width: 40%; /* Adjust image width */
+    margin-bottom: 0; /* Remove bottom margin */
+  }
+  .welcome-text {
+    flex: 1; /* Allow text to take remaining space */
+  }
+  .start-btn {
+    width: auto; /* Allow button to size to content */
+    align-self: flex-start; /* Align button to start of flex container */
   }
 }
 
