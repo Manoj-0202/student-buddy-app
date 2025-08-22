@@ -1,0 +1,140 @@
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3.5rem; /* 56px */
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #eee;
+  box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.05);
+  font-family: "Inter", sans-serif;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-logo {
+  display: none; /* Hidden by default on small screens */
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  padding: 1.5rem; /* Adjusted padding */
+  text-align: center;
+  cursor: pointer; /* Indicate clickability */
+}
+
+.navbar.hidden {
+  transform: translateY(100%);
+}
+
+.navbar.visible {
+  transform: translateY(0);
+}
+
+.navbar.fixed {
+  position: fixed;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.6rem; /* 9.6px */
+  color: #777;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-out; /* Added transform for subtle press effect */
+}
+
+.nav-item:active {
+  transform: scale(0.95); /* Subtle press effect on click */
+}
+
+.nav-item:hover {
+  color: #ff7a00; /* Orange hover */
+}
+
+.nav-item.active {
+  color: #ff7a00; /* Active color */
+  font-weight: 500;
+  background: rgba(255, 122, 0, 0.08); /* Subtle background */
+  border-radius: 0.4rem; /* Slightly rounded corners */
+  padding: 0.2rem 0.4rem; /* Add some padding */
+  position: relative; /* For the bottom border effect */
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%; /* Width of the underline */
+  height: 2px; /* Thickness of the underline */
+  background: #ff7a00; /* Color of the underline */
+  border-radius: 1px;
+}
+
+.nav-icon {
+  font-size: 1rem; /* 16px */
+  margin-bottom: 0.2rem; /* 3.2px */
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .navbar {
+    position: fixed; /* Keep it fixed */
+    top: 0; /* Align to top */
+    left: 0; /* Align to left */
+    bottom: 0; /* Span full height */
+    right: auto; /* Remove right constraint */
+    width: 15rem; /* Set a fixed width for the sidebar */
+    height: 100vh; /* Full viewport height */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align items to the top */
+    align-items: flex-start; /* Align items to the left */
+    border-top: none; /* Remove top border */
+    border-right: 1px solid #eee; /* Add right border */
+    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.05); /* Shadow to the right */
+    padding-top: 0; /* Remove padding-top from navbar, logo has its own */
+    background-color: #f8f8f8; /* Added background color */
+  }
+
+  .navbar-logo {
+    display: block; /* Show logo on large screens */
+    margin-bottom: 1rem; /* Adjusted margin-bottom */
+  }
+
+  .nav-item {
+    font-size: 0.9rem; /* Slightly larger font for sidebar */
+    padding: 0.8rem 1.5rem; /* More padding for sidebar items */
+    width: 100%; /* Make items take full width of sidebar */
+    flex-direction: row; /* Icon and text in a row */
+    justify-content: flex-start; /* Align content to the left */
+  }
+
+  .nav-item.active {
+    padding: 0.8rem 1.5rem; /* Match the padding of regular nav-item */
+    border-radius: 0 0.4rem 0.4rem 0; /* Rounded only on the right side */
+  }
+
+  .nav-icon {
+    font-size: 1.2rem; /* Larger icon */
+    margin-bottom: 0; /* Remove bottom margin */
+    margin-right: 0.8rem; /* Add right margin for spacing */
+  }
+
+  .nav-item.active::after {
+    /* Adjust active indicator for vertical layout */
+    content: '';
+    position: absolute;
+    left: 0; /* Align to left */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    width: 3px; /* Thickness of the indicator */
+    height: 80%; /* Height of the indicator */
+    background: #ff7a00; /* Color of the indicator */
+    border-radius: 1px;
+  }
+}

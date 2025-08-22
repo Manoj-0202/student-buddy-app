@@ -1,0 +1,269 @@
+/* ==== Tokens ==== */
+:root {
+  --bg: #ffffff;
+  --text: #1f1f1f;
+  --muted: #6b6b6b;
+  --card: #f6f6f6;
+  --accent: #ff7a00;
+  --accent-hover: #e96b00;
+  --radius-lg: 0.8rem; /* 12.8px */
+  --radius-md: 0.6rem; /* 9.6px */
+
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08); /* New, more prominent shadow */
+
+  /* Fluid typography and spacing */
+  --fs-brand: clamp(1rem, 1.5vw, 1.125rem);
+  --fs-h1: clamp(1.125rem, 2.8vw, 1.5rem);
+  --fs-h2: clamp(0.9rem, 2.1vw, 1rem);
+  --fs-body: clamp(0.75rem, 1.4vw, 0.875rem);
+  --fs-small: clamp(0.6rem, 1.2vw, 0.75rem);
+
+  --gap-1: clamp(0.4rem, 1.3vw, 0.6rem);
+  --gap-2: clamp(0.6rem, 1.8vw, 0.8rem);
+  --gap-3: clamp(1rem, 2.7vw, 1.2rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ==== Page Wrapper ==== */
+.home-container {
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  padding: var(--gap-2);
+  max-width: 100%; /* Use percentage for full width */
+  margin: 0 auto;
+  padding-bottom: var(--navbar-height); /* space for bottom navbar */
+}
+
+/* ==== Header ==== */
+.home-container .header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem; /* 32px */
+  margin-bottom: 0.4rem; /* 6.4px */
+}
+.home-container .brand {
+  margin: 0;
+  font-size: var(--fs-brand);
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  line-height: 1.1;
+  text-align: center;
+  width: 100%;
+}
+.home-container .settings-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1;
+  padding: 0;
+}
+
+/* ==== Welcome ==== */
+.welcome-box {
+  margin-top: 0.3rem; /* 4.8px */
+}
+.greeting {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  margin: 0.5rem 0 0.6rem; /* 8px 0 9.6px */
+  text-align: left;
+}
+.welcome-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 0.6rem; /* 9.6px */
+  box-shadow: var(--shadow-card);
+}
+.welcome-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  display: block;
+  margin-bottom: 0.6rem; /* 9.6px */
+  object-fit: cover;
+}
+.subhead {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  margin: 0 0 0.3rem; /* 4.8px */
+}
+.muted {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+.start-btn {
+  width: 100%;
+  margin-top: 0.6rem; /* 9.6px */
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  padding: 0.6rem 0.8rem; /* 9.6px 12.8px */
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.04s ease;
+}
+.start-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 6px 16px rgba(255, 122, 0, 0.25); /* More pronounced shadow on hover */
+}
+.start-btn:active {
+  transform: translateY(1px);
+}
+
+/* ==== Section Title ==== */
+.section-title {
+  margin: var(--gap-3) 0 var(--gap-1);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+}
+
+/* ==== Quick Actions ==== */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid */
+  gap: var(--gap-1);
+}
+.action-card {
+  background: var(--card);
+  border: 0;
+  border-radius: var(--radius-lg);
+  padding: var(--gap-1);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* Adjusted transition */
+  box-shadow: var(--shadow-card);
+}
+.action-card:hover {
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
+}
+.action-card:active {
+  transform: translateY(1px);
+}
+.action-card-image {
+  width: 100%;
+  border-radius: var(--radius-md);
+  display: block;
+  margin-bottom: 0.4rem; /* 6.4px */
+}
+.action-card-title {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+/* ==== Features ==== */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
+  gap: var(--gap-1);
+  padding-bottom: 2.5rem; /* 40px */
+}
+.feature-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-1);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* Added transition */
+}
+.feature-card:hover {
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
+}
+.feature-card img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  display: block;
+  margin-bottom: 0.4rem; /* 6.4px */
+}
+.feature-label {
+  margin: 0 0 0.1rem; /* 1.6px */
+  font-weight: 600;
+  font-size: var(--fs-body);
+}
+.feature-muted {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-small);
+  line-height: 1.3;
+}
+
+/* Media Queries for different screen sizes */
+@media (min-width: 480px) {
+  .home-container {
+    padding: var(--gap-3);
+  }
+}
+
+@media (min-width: 768px) {
+  .home-container {
+    max-width: 720px;
+  }
+  .features {
+    padding-bottom: 0;
+  }
+
+  .welcome-card {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2);
+    padding: var(--gap-2); /* Adjust padding for horizontal layout */
+  }
+  .welcome-img {
+    width: 40%; /* Adjust image width */
+    margin-bottom: 0; /* Remove bottom margin */
+  }
+  .welcome-text {
+    flex: 1; /* Allow text to take remaining space */
+  }
+  .start-btn {
+    width: auto; /* Allow button to size to content */
+    align-self: flex-start; /* Align button to start of flex container */
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-container {
+    max-width: 1200px;
+  }
+  :root {
+    --fs-brand: 1.25rem;
+    --fs-h1: 1.75rem;
+    --fs-h2: 1.125rem;
+    --fs-body: 0.875rem;
+    --fs-small: 0.75rem;
+    --gap-1: 0.8rem;
+    --gap-2: 1.2rem;
+    --gap-3: 1.6rem;
+  }
+}
+
