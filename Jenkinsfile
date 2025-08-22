@@ -27,7 +27,7 @@ pipeline {
                     steps {
                         sh 'pwd'
                         sh 'ls -lrt'
-                        sh 'cd frontend-new && npm install'
+                        sh 'cd frontend-all && npm install'
                         sh 'pwd'
                     }
                 }
@@ -61,7 +61,7 @@ pipeline {
                         sh '''
                             ${SONAR_HOME}/sonar-scanner \
                                 -Dsonar.projectKey=student-buddy-app \
-                                -Dsonar.sources=./frontend-new/ \
+                                -Dsonar.sources=./frontend-all/ \
                                 -Dsonar.host.url=http://localhost:9000 \
                                 -Dsonar.login=${SONAR_ID}
                         '''
@@ -72,7 +72,7 @@ pipeline {
 
         stage('Docker Build For Frontend') {
             steps {
-                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} -f ./frontend-new/Dockerfile ./frontend-new'
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} -f ./frontend-all/Dockerfile ./frontend-all'
             }
         }
 
