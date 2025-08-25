@@ -138,3 +138,12 @@
     border-radius: 1px;
   }
 }
+
+.nav-item.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.nav-item.disabled:hover {
+  color: #ccc;
+}

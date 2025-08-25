@@ -70,8 +70,8 @@ const Navbar = () => {
       {homeConfig.navConfig.navItems.map((item, index) => (
         <div
           key={index}
-          className={`nav-item ${isActive(item.path) ? "active" : ""}`}
-          onClick={() => navigate(item.path)}
+          className={`nav-item ${isActive(item.path) ? "active" : ""} ${item.disabled ? "disabled" : ""}`}
+          onClick={() => !item.disabled && navigate(item.path)}
         >
           <item.icon className="nav-icon" />
           <span>{item.text}</span>

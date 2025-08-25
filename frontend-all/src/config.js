@@ -71,6 +71,7 @@ export const homeConfig = {
         path: "/dashboard",
         icon: FaChartBar,
         text: "Dashboard",
+        disabled: true,
       },
       {
         path: "/upload",
@@ -81,6 +82,7 @@ export const homeConfig = {
         path: "/profile",
         icon: FaUser,
         text: "Profile",
+        disabled: true,
       },
     ],
   },
