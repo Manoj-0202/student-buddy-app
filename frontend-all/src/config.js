@@ -3,7 +3,7 @@ import { FaHome, FaUser, FaPlay, FaChartBar } from "react-icons/fa";
 
 export const homeConfig = {
   brand: "StudyBuddy",
-  greeting: "Welcome back, Alex!",
+  greeting: "Welcome back, You are at VNC!",
   welcomeCard: {
     image: "https://res.cloudinary.com/dq4zfh8nh/image/upload/v1755590507/Depth_4_Frame_0_pn6j2y.jpg",
     alt: "AI learning illustration",
