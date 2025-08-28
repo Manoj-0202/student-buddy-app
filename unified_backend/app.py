@@ -12,7 +12,7 @@ app = Flask(__name__)
 # ---- CORS (no auth: keep credentials OFF) ----
 # Configure allowed origins via env if needed: ALLOWED_ORIGINS="http://student-app.local,http://localhost:3000"
 ALLOWED_ORIGINS = [
-    o.strip() for o in os.getenv("ALLOWED_ORIGINS", "http://student-app.local").split(",") if o.strip()
+    o.strip() for o in os.getenv("ALLOWED_ORIGINS", "https://student.vncdigitalservices.com").split(",") if o.strip()
 ]
 
 CORS(
