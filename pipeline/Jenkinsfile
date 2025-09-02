@@ -1,0 +1,238 @@
+def COLOR_MAP = [
+    'SUCCESS': '#00FF00',
+    'FAILURE': '#FF0000',
+    'UNSTABLE': '#FFFF00',
+    'ABORTED': '#FFA500'
+] 
+pipeline {
+    agent any
+
+    environment {
+        SONAR_HOME = tool 'sonar-scanner'
+        SONAR_ID = credentials('sonar')
+        DOCKER_FRONT_IMAGE_NAME = 'student_frontend'
+        DOCKER_BACK_IMAGE_NAME = 'student_backend'
+        DOCKER_USERNAME = credentials('docker')
+        CHART_PATH = './helm'
+    }
+
+    tools {
+        nodejs 'nodejs-22-16-0'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                sh 'git --version'
+                sh 'echo "Building Branch: ${BRANCH_NAME}"'
+            }
+        }
+
+        stage('Installing Dependencies') {
+            parallel {
+                stage('Frontend Dependency') {
+                    steps {
+                        sh 'cd frontend-all && npm install'
+                    }
+                }
+                stage('Backend Dependency') {
+                    steps {
+                        sh '''
+                            cd unified_backend/
+                            pwd
+                            python3 -m venv venv
+                            bash -c ". venv/bin/activate && pip install --upgrade pip"
+                            bash -c ". venv/bin/activate && pip install -r requirements.txt"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Dependency Scanning') {
+            steps {
+                sh 'npm audit --audit-level=critical'
+                sh 'npm audit fix'
+            }
+        }
+
+        stage('Code Coverage Test') {
+            steps {
+                script {
+                    sh 'cd frontend-all'
+                    sh 'ls -lrt'
+                    sh 'npm run test -- --coverage'
+                }
+            }
+        }
+
+        stage('Public Code Coverage Report') {
+            steps {
+                script {
+                    // Generate a code coverage report using LCOV format
+                    // This assumes that your Jest/NYC tools are outputting the coverage in `coverage/` folder
+                    junit '**/coverage/lcov-report/index.html'  // Adjust based on where your report is saved
+                    
+                    // You can also archive the raw coverage report (optional)
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+                }
+            }
+        }
+        
+        stage('SAST - SonarQube') {
+            steps {
+                sh 'sleep 5s'
+                timeout(time: 60, unit: 'SECONDS') {
+                    withSonarQubeEnv('sonar') {
+                        sh 'echo ${SONAR_HOME}'
+                        sh '''
+                            ${SONAR_HOME}/sonar-scanner \
+                                -Dsonar.projectKey=Student-Application \
+                                -Dsonar.sources=./ \
+                                -Dsonar.host.url=http://localhost:9000 \
+                                -Dsonar.login=${SONAR_ID}
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            options { timeout(time: 10, unit: 'MINUTES') }   
+                steps {
+                    waitForQualityGate abortPipeline: true
+                }
+        }
+
+        stage('Docker Build For Frontend') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'staging'
+                }
+            }
+            steps {
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} -f ./frontend-all/Dockerfile ./frontend-all'
+            }
+        }
+
+        stage('Docker Build For Backend') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'staging'
+                }
+            }
+            steps {
+                sh 'docker build -t ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER} -f ./unified_backend/Dockerfile ./unified_backend'
+            }
+        }
+
+        stage('Docker Image Push') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'staging'
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'main-docker', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) {
+                    sh '''
+                        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USER --password-stdin
+                        echo pushing frontend application
+                        docker push ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER}
+                        echo pushing backend application
+                        docker push ${DOCKER_USERNAME}/${DOCKER_BACK_IMAGE_NAME}:${BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
+
+        stage('Security Scan By Trivy') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'staging'
+                }
+            }
+            steps {
+                sh '''
+                    trivy image ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} \
+                    --severity LOW,MEDIUM,HIGH \
+                    --exit-code 0 \
+                    --quiet \
+                    --format json -o student_frontend_trivy_MEDIUM_result.json
+
+                    trivy image ${DOCKER_USERNAME}/${DOCKER_FRONT_IMAGE_NAME}:${BUILD_NUMBER} \
+                    --severity CRITICAL \
+                    --exit-code 0 \
+                    --quiet \
+                    --format json -o student_frontend_trivy_CRITICAL_result.json
+                '''
+            }
+            post {
+                always {
+                    sh '''
+                        trivy convert \
+                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                            --output student_frontend_trivy_MEDIUM_result.html student_frontend_trivy_MEDIUM_result.json
+
+                        trivy convert \
+                            --format template --template "@/usr/local/share/trivy/templates/html.tpl" \
+                            --output student_frontend_trivy_CRITICAL_result.html student_frontend_trivy_CRITICAL_result.json
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy - AWS EC2') {
+            when {
+                branch 'feature/*'
+            }
+            steps {
+                script {
+                    sshagent(['ec2_ssh_with_pvt_key']) {
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no ubuntu@${IP_ADDRESS} "
+                            cp -r frontend-all/build/* /var/www/html
+                            sudo systemctl restart nginx
+                            "
+                        '''
+                    }
+                }
+            }
+        }
+        
+        stage('Upload - AWS S3') {
+            steps {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh  '''
+                            ls -ltr
+                            mkdir reports-$BUILD_ID
+                            cp -rf target/surefire-reports/ reports-$BUILD_ID/
+                            cp -rf target/checkstyle-result.xml reports-$BUILD_ID/
+                            cp trivy*.* reports-$BUILD_ID/
+                            ls -ltr reports-$BUILD_ID/
+                        '''
+                        s3Upload(
+                            file:"reports-$BUILD_ID", 
+                            bucket:'staging-test-reports-chatapp', 
+                            path:"jenkins-$BUILD_ID/"
+                        )
+                }
+            }
+        }
+
+    }
+
+    post {
+        always {
+            script {
+                def color = COLOR_MAP[currentBuild.currentResult] ?: '#FFFFFF'
+                def message = "Pipeline ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}"
+                slackSend channel: '#jenkins-cicd', color: color, message: message
+            }
+        }
+    }
+}
