@@ -11,19 +11,19 @@ app = Flask(__name__)
 
 # ---- CORS (no auth: keep credentials OFF) ----
 # Configure allowed origins via env if needed: ALLOWED_ORIGINS="http://student-app.local,http://localhost:3000"
-# ALLOWED_ORIGINS = [
-#     o.strip() for o in os.getenv("ALLOWED_ORIGINS", "https://student.vncdigitalservices.com").split(",") if o.strip()
-# ]
+ALLOWED_ORIGINS = [
+    o.strip() for o in os.getenv("ALLOWED_ORIGINS", "https://student.vncdigitalservices.com", "https://www.student.vncdigitalservices.com").split(",") if o.strip()
+]
 
-# CORS(
-#     app,
-#     resources={r"/*": {"origins": ALLOWED_ORIGINS}},
-#     supports_credentials=False,  # ← important: no auth, so no cookies/credentials
-#     methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-#     allow_headers=["Content-Type", "Accept"],  # trimmed: no Authorization header since there's no auth
-#     expose_headers=["Content-Length", "Content-Range"],
-#     max_age=86400,  # cache preflight for a day
-# )
+CORS(
+    app,
+    resources={r"/*": {"origins": ALLOWED_ORIGINS}},
+    supports_credentials=False,  # ← important: no auth, so no cookies/credentials
+    methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Accept"],  # trimmed: no Authorization header since there's no auth
+    expose_headers=["Content-Length", "Content-Range"],
+    max_age=86400,  # cache preflight for a day
+)
 
 @app.route("/health")
 def health():
